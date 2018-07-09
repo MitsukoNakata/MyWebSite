@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="PCcatSite">
+        
+    <wb-module deploy-name="PCrobin">
+                
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="PCcatSite"/>
-        <property name="java-output-path" value="/PCcatSite/build/classes"/>
+                
+        <property name="java-output-path" value="/PCrobin/build/classes"/>
+        <property name="context-root" value="PCrobin"/>
+            
     </wb-module>
+    
 </project-modules>

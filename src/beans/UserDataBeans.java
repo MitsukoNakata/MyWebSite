@@ -9,19 +9,22 @@ import java.io.Serializable;
  */
 public class UserDataBeans implements Serializable {
 	private String name;
-	private String address;
-	private String password;
 	private String email;
+	private String password;
+	private String zipcode;
+	private String address;
 	private int id;
-	private int phonenumber;
+	private String phonenumber;
 
 
 	// コンストラクタ
 	public UserDataBeans() {
 		this.name = "";
-		this.address = "";
-		this.password = "";
 		this.email = "";
+		this.password = "";
+		this.zipcode = "";
+		this.address = "";
+		this.phonenumber = "";
 
 	}
 
@@ -33,12 +36,12 @@ public class UserDataBeans implements Serializable {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -49,6 +52,22 @@ public class UserDataBeans implements Serializable {
 		this.password = password;
 	}
 
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -57,32 +76,20 @@ public class UserDataBeans implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 
-	/**
-	 * ユーザー情報更新時の必要情報をまとめてセットするための処理
-	 *
-	 * @param name
-	 * @param address
-	 * @param id
-	 */
-	public void setUpdateUserDataBeansInfo(String name, String email, String adress, int id) {
+	public void setUpdateUserDataBeansInfo(String name, String email, String zipcode,String address,String phonenumber, int id) {
 		this.name = name;
+		this.email = email;
+		this.address = zipcode;
 		this.address = address;
+		this.address = phonenumber;
 		this.id = id;
 	}
 

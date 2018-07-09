@@ -12,7 +12,7 @@ import ec.EcHelper;
 
 /**
  *
- * @author d-yamaguchi
+ * @author m-takeuchi
  *
  */
 public class UserDAO {
@@ -31,12 +31,14 @@ public class UserDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("INSERT INTO t_user(name,email,address,login_password,create_date) VALUES(?,?,?,?,?)");
+			st = con.prepareStatement("INSERT INTO t_user(name,email,password,zipcode,address,phone_number,create_date) VALUES(?,?,?,?,?,?,?)");
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getEmail());
-			st.setString(3, udb.getAddress());
-			st.setString(4, EcHelper.getSha256(udb.getPassword()));
-			st.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+			st.setString(3, EcHelper.getSha256(udb.getPassword()));
+			st.setString(4, udb.getZipcode());
+			st.setString(5, udb.getAddress());
+			st.setString(6, udb.getPhonenumber());
+			st.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
 			st.executeUpdate();
 			System.out.println("inserting user has been completed");
 		} catch (SQLException e) {
@@ -73,7 +75,7 @@ public class UserDAO {
 
 			int userId = 0;
 			while (rs.next()) {
-				if (EcHelper.getSha256(password).equals(rs.getString("login_password"))) {
+				if (EcHelper.getSha256(password).equals(rs.getString("password"))) {
 					userId = rs.getInt("id");
 					System.out.println("login succeeded");
 					break;
@@ -107,14 +109,16 @@ public class UserDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT id,name, email, address FROM t_user WHERE id =" + userId);
+			st = con.prepareStatement("SELECT id,name, email, zipcode, address ,phone_number FROM t_user WHERE id =" + userId);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
 				udb.setId(rs.getInt("id"));
 				udb.setName(rs.getString("name"));
 				udb.setEmail(rs.getString("email"));
+				udb.setZipcode(rs.getString("zipcode"));
 				udb.setAddress(rs.getString("address"));
+				udb.setPhonenumber(rs.getString("phone_number"));
 			}
 
 			st.close();
@@ -149,22 +153,26 @@ public class UserDAO {
 		try {
 
 			con = DBManager.getConnection();
-			st = con.prepareStatement("UPDATE t_user SET name=?, email=?, address=? WHERE id=?;");
+			st = con.prepareStatement("UPDATE t_user SET name=?, email=?, zipcode=?, address=? ,phone_number=?, WHERE id=?;");
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getEmail());
-			st.setString(3, udb.getAddress());
-			st.setInt(4, udb.getId());
+			st.setString(4, udb.getZipcode());
+			st.setString(5, udb.getAddress());
+			st.setString(5, udb.getPhonenumber());
+			st.setInt(6, udb.getId());
 			st.executeUpdate();
 			System.out.println("update has been completed");
 
-			st = con.prepareStatement("SELECT name, email, address FROM t_user WHERE id=" + udb.getId());
+			st = con.prepareStatement("SELECT name, email, zipcode, address, phone_number FROM t_user WHERE id=" + udb.getId());
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
 
 				updatedUdb.setName(rs.getString("name"));
 				updatedUdb.setEmail(rs.getString("email"));
+				updatedUdb.setAddress(rs.getString("zipcode"));
 				updatedUdb.setAddress(rs.getString("address"));
+				updatedUdb.setAddress(rs.getString("phone_number"));
 			}
 
 			st.close();
@@ -199,12 +207,12 @@ public class UserDAO {
 		try {
 			con = DBManager.getConnection();
 			// 入力されたemailが存在するか調べる
-			st = con.prepareStatement("SELECT login_id FROM t_user WHERE email = ? AND id != ?");
+			st = con.prepareStatement("SELECT email FROM t_user WHERE email = ? AND id != ?");
 			st.setString(1, email);
 			st.setInt(2, userId);
 			ResultSet rs = st.executeQuery();
 
-			System.out.println("searching loginId by inputLoginId has been completed");
+			System.out.println("searching email by inputEmail has been completed");
 
 			if (rs.next()) {
 				isOverlap = true;

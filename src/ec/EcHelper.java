@@ -11,7 +11,7 @@ import beans.ItemDataBeans;
 /**
  * 定数保持、処理及び表示簡略化ヘルパークラス
  *
- * @author d-yamaguchi
+ * @author m-takeuchi
  *
  */
 public class EcHelper {
