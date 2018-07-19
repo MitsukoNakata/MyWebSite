@@ -1,52 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
-<html lang=jpn>
+<SCRIPT language="JavaScript">
+function Add(){
+ document.fm.op1.value = document.fm.price.value + document.fm.count.value;
+}
+</SCRIPT>
+<html lang="jpn">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
-     <link href="css/form-validation.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+	<style>
+  	#validationMessage {
+   	 font-size: 80%;
+	  }
+	</style>
 
-    <link rel="shortcut icon" href="img/pcrobinfavicon.ico">
     <title>カート</title>
-  </head>
-    <body class="bg-light">
-    <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
-      <a class="navbar-brand" href="index.html"><img src="img/logo_w.png" width="113" height=auto></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
 
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">ホーム<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="cart.html">カート</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">会員ログイン</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="例:core i7" aria-label="Search">
-          <button class="btn btn-light" type="submit">検索</button>
-        </form>
-      </div>
-    </nav>
-  </header>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+
+  </head>
+
+  <body class="bg-light">
+	<jsp:include page="/baselayout/header.jsp" />
 
   <div class ="container">
 		<div class="py-5 text-center">
+
         	<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        	<h2>カートの中身</h2>
+        	<h2>カートの中</h2>
         </div>
-        <div class="container">
+	<form action="Buy" method="POST">
         <table class="table">
           <thead>
             <tr>
@@ -59,44 +50,47 @@
           <tbody>
             <tr>
               <td> <!--カスタマイズした商品詳細-->
-              <h4>オールインワンモデルABX</h4>
-              <p>・インテル Core i3-7100U　(2.40GHz / 2コア・4スレッド / 3MB) </p>
-              <p>・4GB (4GBx1) PC4-17000 (2133MHz)</p>
-              <p>・インテルHDグラフィックス(プロセッサー内蔵)</p>
-              <p>・500GB ハードドライブ (SATA, 7200回転)</p>
-              <p>・Windows 10 Home (64bit)</p>
-              <p>・Microsoft Office Personal Premium</p>
+              <h5>${customName}</h5><br/>
+              <c:set var="customPrice" value="${0}" />
+              <c:forEach var="type" items="${typeList}">
+              	<c:set var="itemType" value="${type.itemType}" /> <!-- パーツ名取得用 -->
+              	 <c:set var="customPrice" value="${customPrice + requestScope[itemType].price}" /><!-- カスマイズ金額取得用 -->
+              	<p>・${requestScope[itemType].name}</p>
+
+              </c:forEach>
               </td>
-              <td>¥59,800</td>
-              <td>1</td>
-              <td>¥59,800</td>
+              <td>
+              <form oninput="opt1.value = a1.valueAsNumber * b1.valueAsNumber">
+              <p type="number" name="a1"><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</p></td>
+              <td><input type="number" name="b1" min="1" max="20" value="1" size="1"></td>
+              <td><output name="opt1"><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</td>
+              </output></form>
             </tr>
-            <tr>
-              <td>Z3700 ワイヤレスマウス (スウィート ハート)</td>
-              <td>¥2,700</td>
-              <td>1</td>
-              <td>¥2,700</td>
-            </tr>
-            <tr>
-              <td></td>
-              <th>配送方法</th>
-              <td>通常配送</td>
-              <td>¥0</td>
-            </tr>
-            <tr>
+             <tr>
               <td></td>
               <td></td>
               <th>合計金額</td>
               <td>¥62,500</td>
             </tr>
+            <tr>
+              <td></td>
+
+              <th>配送方法</th>
+              <td colspan="2"><select class="form-control" data="pull-right" data-style="text-right" name="delivery_method_id">
+				<c:forEach var="dmdb" items="${dmdbList}" >
+				<option value="${dmdb.id}" class="text-right"> ${dmdb.name}  　　${dmdb.price}円</option>
+				</c:forEach>
+				</select></td>
+            </tr>
+
 
           </tbody>
         </table>
-      </div>
+
       <div class="float-right">
-			<a href="buy.html">
-			<button type="button" class="btn btn-danger btn-lg">
+			<button type="sumbit" class="btn btn-danger btn-lg">
         購入・注文へ</button></div>
+        </form>
 	</div><!--/.container-->
 
 

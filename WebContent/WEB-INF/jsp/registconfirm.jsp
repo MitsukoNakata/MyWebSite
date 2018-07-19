@@ -20,33 +20,7 @@
   </head>
 
   <body class="bg-light">
-    <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
-      <a class="navbar-brand" href="Index"><img src="img/logo_w.png" width="113" height=auto></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="Index">ホーム<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Cart">カート</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Login">会員ログイン</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="例:core i7" aria-label="Search">
-          <button class="btn btn-light" type="submit">検索</button>
-        </form>
-      </div>
-    </nav>
-  </header>
-
+	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -63,18 +37,12 @@
               <div class="mb-3">
                 <label for="Name">お名前</label>
                 <input name="user_name" type="text" class="form-control" id="name" placeholder="例：山田　太郎" value="${udb.name}" readonly>
-                <div class="invalid-feedback">
-                  お名前の欄が未入力です.
-                </div>
               </div>
 
 
             <div class="mb-3">
               <label for="email">メールアドレス<span class="text-muted">(ユーザIDとして使用します)</span></label>
               <input name="email" type="email" class="form-control" id="inputEmail" placeholder="you@example.com" value="${udb.email}" readonly>
-              <div class="invalid-feedback">
-                メールアドレスの欄が未入力です。
-              </div>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -88,9 +56,6 @@
               <div class="col-md-6 mb-3">
                 <label for="zip">郵便番号</label>
                 <input name="zipcode" type="text" class="form-control" id="zip" placeholder="001-0001" value="${udb.zipcode}"readonly>
-                <div class="invalid-feedback">
-                  郵便番号の欄が未入力です.
-                </div>
               </div>
             </div>
             <div class="mb-3">
@@ -104,9 +69,6 @@
               <div class="col-md-6">
                 <label for="telephone">電話番号</label>
                 <input name="phonenumber" type="text" class="form-control" id="telephone" placeholder="090-1234-5678" value="${udb.phonenumber}" readonly>
-                <div class="invalid-feedback">
-                  郵便番号の欄が未入力です.
-                </div>
               </div>
 
             </div>

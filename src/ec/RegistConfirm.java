@@ -50,7 +50,7 @@ public class RegistConfirm extends HttpServlet {
 			String validationMessage = "";
 
 			// loginIdの重複をチェック
-			if (UserDAO.isOverlapLoginId(udb.getEmail(), 0)) {
+			if (UserDAO.isOverlapEmail(udb.getEmail(), 0)) {
 				validationMessage += "既にご登録があるメールアドレスです";
 			}
 

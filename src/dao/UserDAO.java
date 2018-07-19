@@ -58,7 +58,7 @@ public class UserDAO {
 	 *            メールアドレス
 	 * @param password
 	 *            パスワード
-	 * @return int ログインIDとパスワードが正しい場合対象のユーザーID 正しくない||登録されていない場合0
+	 * @return int メールアドレスとパスワードが正しい場合対象のユーザーID 正しくない||登録されていない場合0
 	 * @throws SQLException
 	 *             呼び出し元にスロー
 	 */
@@ -82,7 +82,7 @@ public class UserDAO {
 				}
 			}
 
-			System.out.println("searching userId by loginId has been completed");
+			System.out.println("searching userId by email has been completed");
 			return userId;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -156,8 +156,8 @@ public class UserDAO {
 			st = con.prepareStatement("UPDATE t_user SET name=?, email=?, zipcode=?, address=? ,phone_number=?, WHERE id=?;");
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getEmail());
-			st.setString(4, udb.getZipcode());
-			st.setString(5, udb.getAddress());
+			st.setString(3, udb.getZipcode());
+			st.setString(4, udb.getAddress());
 			st.setString(5, udb.getPhonenumber());
 			st.setInt(6, udb.getId());
 			st.executeUpdate();
@@ -189,16 +189,16 @@ public class UserDAO {
 	}
 
 	/**
-	 * loginIdの重複チェック
+	 * emailの重複チェック
 	 *
-	 * @param loginId
-	 *            check対象のログインID
+	 * @param email
+	 *            check対象のemail
 	 * @param userId
 	 *            check対象から除外するuserID
 	 * @return bool 重複している
 	 * @throws SQLException
 	 */
-	public static boolean isOverlapLoginId(String email, int userId) throws SQLException {
+	public static boolean isOverlapEmail(String email, int userId) throws SQLException {
 		// 重複しているかどうか表す変数
 		boolean isOverlap = false;
 		Connection con = null;

@@ -4,48 +4,54 @@ import java.io.Serializable;
 
 /**
  * アイテム
- * @author d-yamaguchi
+ * @author m-takeuchi
  *
  */
 public class ItemDataBeans implements Serializable {
 	private int id;
+	private String itemType;
 	private String name;
-	private String detail;
 	private int price;
 	private String fileName;
+	private int itemNum;
 
 
 	public int getId() {
 		return id;
 	}
-	public void setId(int itemId) {
-		this.id = itemId;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getItemType() {
+		return itemType;
+	}
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String itemName) {
-		this.name = itemName;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getPrice() {
 		return price;
 	}
-	public void setPrice(int itemPrice) {
-		this.price = itemPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public String getFileName() {
 		return fileName;
 	}
-	public void setFileName(String filename) {
-		this.fileName = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-
+	public int getItemNum() {
+		return itemNum;
+	}
+	public void setItemNum(int itemNum) {
+		this.itemNum = itemNum;
+	}
 
 
 

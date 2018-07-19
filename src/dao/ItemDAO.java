@@ -11,7 +11,7 @@ import beans.ItemDataBeans;
 
 /**
  *
- * @author d-yamaguchi
+ * @author t-takeuchi
  *
  */
 public class ItemDAO {
@@ -19,35 +19,154 @@ public class ItemDAO {
 
 
 	/**
-	 * ランダムで引数指定分のItemDataBeansを取得
-	 * @param limit 取得したいかず
+	 * パーツのカテゴリリストを取得
 	 * @return <ItemDataBeans>
 	 * @throws SQLException
 	 */
-	public static ArrayList<ItemDataBeans> getRandItem(int limit) throws SQLException {
+		public static ArrayList<ItemDataBeans> getTypeList() throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+			try {
+				con = DBManager.getConnection();
+
+				st = con.prepareStatement("SELECT * FROM m_item_type");
+
+				ResultSet rs = st.executeQuery();
+
+				ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
+
+				while (rs.next()) {
+					ItemDataBeans item = new ItemDataBeans();
+					item.setId(rs.getInt("id"));
+					item.setItemType(rs.getString("type_category"));
+					item.setName(rs.getString("type_name"));
+					item.setFileName(rs.getString("type_img"));
+					itemList.add(item);
+				}
+				System.out.println("getTypeList completed");
+				return itemList;
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+		}
+
+		/**
+		 * パーツ別のリストアップする
+		 * @param パーツのカテゴリー
+		 * @return <ItemDataBeans>
+		 * @throws SQLException
+		 */
+
+		public static ArrayList<ItemDataBeans> getByItemType(String itemType) throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+			try {
+				con = DBManager.getConnection();
+
+				st = con.prepareStatement("SELECT * " +
+						"FROM m_item " +
+						"JOIN m_item_type " +
+						"ON m_item.item_type = m_item_type.id " +
+						"WHERE m_item_type.type_category = ? ");
+				st.setString(1, itemType);
+
+				ResultSet rs = st.executeQuery();
+
+				ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
+
+				while (rs.next()) {
+					ItemDataBeans item = new ItemDataBeans();
+					item.setId(rs.getInt("id"));
+					item.setName(rs.getString("name"));
+					item.setItemType(rs.getString("type_name"));
+					item.setPrice(rs.getInt("price"));
+					//item.setFileName(rs.getString("file_name"));
+					itemList.add(item);
+				}
+				System.out.println("getAllItem completed");
+				return itemList;
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+		}
+
+		/**
+		 * 該当カスタマイズの標準パーツを抽出
+		 * @param パーツのカテゴリー
+		 * @return <ItemDataBeans>
+		 * @throws SQLException
+		 */
+
+		public static int getByCustomMenu(String type,int id) throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+			try {
+				con = DBManager.getConnection();
+
+				st = con.prepareStatement("SELECT ? FROM m_custom_menu where id = ?");
+				st.setString(1, type);
+				st.setInt(2, id);
+
+				ResultSet rs = st.executeQuery();
+				System.out.println("searching item by inputItems has been completed");
+
+				int itemNum = 0;
+
+				while (rs.next()) {
+						itemNum = rs.getInt(type);;
+						System.out.println("searching item by itemNum has been completed");
+						break;
+					}
+				return itemNum;
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+		}
+
+
+	/**
+	 * 商品IDによる商品検索
+	 * @param itemId
+	 * @return ItemDataBeans
+	 * @throws SQLException
+	 */
+	public static ItemDataBeans getItemByCustomItemID(int itemId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM m_item ORDER BY RAND() LIMIT ? ");
-			st.setInt(1, limit);
+			st = con.prepareStatement("SELECT * FROM m_custom_menu WHERE id = ?");
+			st.setInt(1, itemId);
 
 			ResultSet rs = st.executeQuery();
 
-			ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
-
-			while (rs.next()) {
-				ItemDataBeans item = new ItemDataBeans();
+			ItemDataBeans item = new ItemDataBeans();
+			if (rs.next()) {
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
-				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
-				itemList.add(item);
 			}
-			System.out.println("getAllItem completed");
-			return itemList;
+
+			System.out.println("searching item by itemID has been completed");
+
+			return item;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
@@ -57,7 +176,6 @@ public class ItemDAO {
 			}
 		}
 	}
-
 	/**
 	 * 商品IDによる商品検索
 	 * @param itemId
@@ -79,7 +197,6 @@ public class ItemDAO {
 			if (rs.next()) {
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
-				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
 			}
@@ -132,7 +249,6 @@ public class ItemDAO {
 				ItemDataBeans item = new ItemDataBeans();
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
-				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
 				itemList.add(item);

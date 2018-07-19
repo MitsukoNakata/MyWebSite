@@ -1,4 +1,7 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="jpn">
   <head>
@@ -6,44 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <link rel="shortcut icon" href="img/pcrobinfavicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
     <title>注文内容を確認・変更</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
   </head>
-
   <body class="bg-light">
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-info">
-      <a class="navbar-brand" href="index.html"><img src="img/logo_w.png" width="113" height=auto></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">ホーム<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="cart.html">カート</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">会員ログイン</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="例:core i7" aria-label="Search">
-          <button class="btn btn-info" type="submit">検索</button>
-        </form>
-      </div>
-    </nav>
-  </header>
+	<jsp:include page="/baselayout/header.jsp" />
 
     <div class="container">
 
@@ -55,12 +30,12 @@
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">カートの内容</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="badge badge-secondary badge-pill">1</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
+                <h6 class="my-0">商品名</h6>
                 <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$12</span>
@@ -74,10 +49,10 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">配送方法</h6>
+                <small class="text-muted">${bdb.deliveryMethodName}</small>
               </div>
-              <span class="text-muted">$5</span>
+              <span class="text-muted">${bdb.deliveryMethodPrice}円</span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
@@ -87,7 +62,7 @@
               <span class="text-success">-$5</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
+              <span>合計金額</span>
               <strong>$20</strong>
             </li>
           </ul>
@@ -106,7 +81,7 @@
           <form class="needs-validation" novalidate>
               <div class="mb-3">
                 <label for="Name">お名前</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="${user.id}" required>
                 <div class="invalid-feedback">
                   お名前の欄が未入力です.
                 </div>

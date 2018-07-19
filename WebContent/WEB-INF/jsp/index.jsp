@@ -5,46 +5,21 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-
-    <link rel="shortcut icon" href="img/pcrobinfavicon.ico">
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
     <title>PC Robin</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="dist/css/custom.css">
+
   </head>
   <body class="bg-light">
-    <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
-      <a class="navbar-brand" href="Index"><img src="img/logo_w.png" width="113" height=auto></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="Index">ホーム<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Cart">カート</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Login">会員ログイン</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="例:core i7" aria-label="Search">
-          <button class="btn btn-light" type="submit">検索</button>
-        </form>
-      </div>
-    </nav>
-  </header>
-
+	<jsp:include page="/baselayout/header.jsp" />
   <main role="main">
       <br><br>
-    <!--div class="container"-->
+    <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -55,30 +30,30 @@
         <div class="carousel-item active">
           <img src="img/firstslide.png" alt="First slide" class="img-fluid">
             <div class="container">
-              <div class="carousel-caption text-left">
+              <div class="carousel-caption text-right">
               <h1 class="text-dark">最新モデルABX</h1>
               <p class="text-dark">core i3モデル5万円台から</p>
-              <p><a class="btn btn-lg btn-primary" href="item.html" role="button">詳しく見る</a></p>
+              <p><a class="btn btn-lg btn-primary" href="Item?item_id=1" role="button">詳しく見る</a></p>
             </div>
           </div>
         </div>
         <div class="carousel-item">
           <img src="img/secondslide.png" alt="Second slide" class="img-fluid">
           <div class="container">
-            <div class="carousel-caption text-right">
+            <div class="carousel-caption text-left">
               <h1>スタイリッシュ</h1>
-              <p class="text-dark">オールインワンモデル59,800円から</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">詳しく見る</a></p>
+              <p>オールインワンモデル59,800円から</p>
+              <p><a class="btn btn-lg btn-primary" href="Item?item_id=1" role="button">詳しく見る</a></p>
             </div>
           </div>
         </div>
         <div class="carousel-item">
           <img src="img/firstslide.png" alt="Third slide" class="img-fluid">
           <div class="container">
-            <div class="carousel-caption text-left">
+            <div class="carousel-caption text-right">
               <h1 class="text-dark">One more for good measure.</h1>
               <p class="text-dark">Cras justo odio, dapibus a</p>
-              <p><a class="btn btn-lg btn-info" href="#" role="button">詳しく見る</a></p>
+              <p><a class="btn btn-lg btn-info" href="Item?item_id=1" role="button">詳しく見る</a></p>
             </div>
           </div>
         </div>
@@ -92,7 +67,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!--/.carousel -->
-  <!--/div-->
+  </div>
 
     <!-- Marketing messaging and featurettes
     ================================================== -->
@@ -109,11 +84,11 @@
           <p><img class="mx-auto d-block" src="https://png.icons8.com/material/50/000000/coins.png" alt="Generic placeholder image" width="50" height="auto"></p>
           <h2 class="text-center">価格から選ぶ</h2>
           <br>
-          <a href="item.html">5万円台</a>
+          <a href="Item?item_id=1">5万円台</a>
           <br>
-          <a href="item.html">7万円台</a>
+          <a href="Item?item_id=2">7万円台</a>
           <br>
-          <a href="item.html">10万円以上</a>
+          <a href="Item?item_id=3">10万円以上</a>
           <br><br>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
@@ -133,7 +108,7 @@
           <p><img class="mx-auto d-block" src="https://png.icons8.com/material/50/000000/processor.png" alt="Generic placeholder image"  width="50" height="auto"></p>
           <h2>性能で選ぶ</h2>
           <br>
-          <a href="item.html">intel core i3搭載</a>
+          <a href="Item">intel core i3搭載</a>
           <br>
           <a href="item.html">intel core i5搭載</a>
           <br>

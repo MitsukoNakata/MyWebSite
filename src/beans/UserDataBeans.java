@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * ユーザー
- * @author d-yamaguchi
+ * @author t-takeuchi
  *
  */
 public class UserDataBeans implements Serializable {
@@ -25,7 +25,6 @@ public class UserDataBeans implements Serializable {
 		this.zipcode = "";
 		this.address = "";
 		this.phonenumber = "";
-
 	}
 
 	public String getName() {
