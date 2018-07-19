@@ -59,12 +59,12 @@ function Add(){
 
               </c:forEach>
               </td>
-              <td>
+			  <td colspan="3">
               <form oninput="opt1.value = a1.valueAsNumber * b1.valueAsNumber">
-              <p type="number" name="a1"><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</p></td>
-              <td><input type="number" name="b1" min="1" max="20" value="1" size="1"></td>
-              <td><output name="opt1"><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</td>
-              </output></form>
+              <input type="number" name="a1" value="59800" readonly class="form-control-plaintext">x
+              <input type="number" name="b1" min="1" max="20" value="1" size="1">
+              <output name="opt1">0</output></form>
+			</td>
             </tr>
              <tr>
               <td></td>
