@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * 購入データ
- * @author d-yamaguchi
+ * @author m-takeuchi
  *
  */
 public class BuyDataBeans  implements Serializable {
@@ -17,7 +17,6 @@ public class BuyDataBeans  implements Serializable {
 	private int deliveryMethodId;
 	private Date buyDate;
 	private String customName;
-	private int basicPrice;
 	private int base;
 	private int cpu;
 	private int ram;
@@ -54,12 +53,7 @@ public class BuyDataBeans  implements Serializable {
 	public void setCustomName(String customName) {
 		this.customName = customName;
 	}
-	public int getBasicPrice() {
-		return basicPrice;
-	}
-	public void setBasicPrice(int basicPrice) {
-		this.basicPrice = basicPrice;
-	}
+
 	public int getBase() {
 		return base;
 	}

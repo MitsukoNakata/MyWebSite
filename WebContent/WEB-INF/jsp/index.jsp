@@ -18,7 +18,7 @@
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
   <main role="main">
-      <br><br>
+      <br><br><br>
     <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -31,29 +31,35 @@
           <img src="img/firstslide.png" alt="First slide" class="img-fluid">
             <div class="container">
               <div class="carousel-caption text-right">
-              <h1 class="text-dark">最新モデルABX</h1>
-              <p class="text-dark">core i3モデル5万円台から</p>
+              <h1 class="text-dark">Be Stylish!</h1>
+              <h5 class="text-light">最新モデルABX　　
+              <br/>洗練されたデザインで
+              <br/>core i3モデル5万円台から</h5>
+
               <p><a class="btn btn-lg btn-primary" href="Item?item_id=1" role="button">詳しく見る</a></p>
             </div>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="img/secondslide.png" alt="Second slide" class="img-fluid">
+          <img src="img/secondslide.png" alt="Third slide" class="img-fluid">
           <div class="container">
             <div class="carousel-caption text-left">
-              <h1>スタイリッシュ</h1>
-              <p>オールインワンモデル59,800円から</p>
-              <p><a class="btn btn-lg btn-primary" href="Item?item_id=1" role="button">詳しく見る</a></p>
+            <h1>Outlet Store</h1>
+              <h5 class="text-light">数量限定
+              <br>オールインワンモデル
+              <br>49,800円から</h5>
+              <p><a class="btn btn-lg btn-primary disabled" href="Item?item_id=1" role="button">Comming Soon</a></p>
             </div>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="img/firstslide.png" alt="Third slide" class="img-fluid">
+          <img src="img/thirdslide.png" alt="Second slide" class="img-fluid">
           <div class="container">
-            <div class="carousel-caption text-right">
-              <h1 class="text-dark">One more for good measure.</h1>
-              <p class="text-dark">Cras justo odio, dapibus a</p>
-              <p><a class="btn btn-lg btn-info" href="Item?item_id=1" role="button">詳しく見る</a></p>
+            <div class="carousel-caption text-left">
+              <h1 class="text-light">Let's Play!</h1>
+              <h5 class="text-dark">ハイスペックXBXモデル<br/>
+              発売記念イベント開催！<br/>8/1から</h5>
+              <p><a class="btn btn-lg btn-info disabled" href="Item?item_id=1" role="button">Comming Soon</a></p>
             </div>
           </div>
         </div>
@@ -68,17 +74,11 @@
       </a>
     </div><!--/.carousel -->
   </div>
-
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
     <br><br><br>
     <div class="container marketing">
-
-      <!-- Three columns of text below the carousel -->
-      <div class="col-12">
-        <p><img src="img/trust.png" class="img-fluid"></p>
-      </div>
         <div class="row text-center">
         <div class="col-lg-4">
           <p><img class="mx-auto d-block" src="https://png.icons8.com/material/50/000000/coins.png" alt="Generic placeholder image" width="50" height="auto"></p>
@@ -96,11 +96,11 @@
           <p><img class="mx-auto d-block" src="https://png.icons8.com/ios/50/000000/controller-filled.png" alt="Generic placeholder image" width="50" height="auto"></p>
           <h2>用途で選ぶ</h2>
           <br>
-          <a href="item.html">普段使い用</a>
+          <a href="Item?item_id=4">普段使い用</a>
           <br>
-          <a href="item.html">ゲーム用</a>
+          <a href="Item?item_id=5">ゲーム用</a>
           <br>
-          <a href="item.html">デザイン用</a>
+          <a href="Item?item_id=6">デザイン用</a>
           <br><br>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
@@ -108,16 +108,18 @@
           <p><img class="mx-auto d-block" src="https://png.icons8.com/material/50/000000/processor.png" alt="Generic placeholder image"  width="50" height="auto"></p>
           <h2>性能で選ぶ</h2>
           <br>
-          <a href="Item">intel core i3搭載</a>
+          <a href="Item?item_id=7">intel core i3搭載</a>
           <br>
-          <a href="item.html">intel core i5搭載</a>
+          <a href="Item?item_id=8">intel core i5搭載</a>
           <br>
-          <a href="item.html">intel core i7搭載</a>
+          <a href="Item?item_id=9">intel core i7搭載</a>
           <br><br>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
-
+	  <div class="col-12">
+        <p><img src="img/trust.png" class="img-fluid"></p>
+      </div>
 
       <!-- START THE FEATURETTES -->
 
@@ -172,7 +174,7 @@
     <!-- FOOTER -->
     <footer class="container">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </footer>
 
 

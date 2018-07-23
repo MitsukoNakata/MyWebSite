@@ -38,7 +38,7 @@ public class CustomDAO {
 
 						item.setId(rs.getInt("id"));
 						item.setCustomName(rs.getString("custom_name"));
-						item.setBasicPrice(rs.getInt("basic_price"));
+						item.setPrice(rs.getInt("basic_price"));
 						item.setBase(rs.getInt("base"));
 						item.setCpu(rs.getInt("cpu"));
 						item.setRam(rs.getInt("ram"));

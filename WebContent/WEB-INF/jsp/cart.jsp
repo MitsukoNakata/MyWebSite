@@ -3,11 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
-<SCRIPT language="JavaScript">
-function Add(){
- document.fm.op1.value = document.fm.price.value + document.fm.count.value;
-}
-</SCRIPT>
+
 <html lang="jpn">
   <head>
     <meta charset="utf-8">
@@ -15,11 +11,29 @@ function Add(){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
-	<style>
-  	#validationMessage {
+<style type="text/css"><!--
+/*ここに調整CSS記述*/
+ #validationMessage {
    	 font-size: 80%;
 	  }
-	</style>
+
+.form-control-text {
+  padding-top: $input-padding-y;
+  padding-bottom: $input-padding-y;
+  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  line-height: $input-line-height;
+  color: $input-plaintext-color;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: $input-border-width 0;
+
+  &.form-control-sm,
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+--></style>
 
     <title>カート</title>
 
@@ -50,45 +64,44 @@ function Add(){
           <tbody>
             <tr>
               <td> <!--カスタマイズした商品詳細-->
-              <h5>${customName}</h5><br/>
-              <c:set var="customPrice" value="${0}" />
-              <c:forEach var="type" items="${typeList}">
-              	<c:set var="itemType" value="${type.itemType}" /> <!-- パーツ名取得用 -->
-              	 <c:set var="customPrice" value="${customPrice + requestScope[itemType].price}" /><!-- カスマイズ金額取得用 -->
-              	<p>・${requestScope[itemType].name}</p>
-
-              </c:forEach>
+              	<h5>${customName}</h5>
+				<c:set var="customPrice" value="${0}" />
+				<c:forEach var="type" items="${typeList}">
+				  <c:set var="itemType" value="${type.itemType}" /> <!-- パーツ名取得用 -->
+				   <c:set var="customPrice" value="${customPrice + requestScope[itemType].price}" /><!-- カスマイズ金額取得用 -->
+				  <p><input type="hidden" name="${itemType}" value="${requestScope[itemType].id}">
+				  ・${requestScope[itemType].name}</p>
+				</c:forEach>
               </td>
-			  <td colspan="3">
-              <form oninput="opt1.value = a1.valueAsNumber * b1.valueAsNumber">
-              <input type="number" name="a1" value="59800" readonly class="form-control-plaintext">x
-              <input type="number" name="b1" min="1" max="20" value="1" size="1">
-              <output name="opt1">0</output></form>
-			</td>
+				<td>${customPrice}
+				<td>1
+				<td>${customPrice}</td>
             </tr>
              <tr>
+
+              <td>
+              </td>
+
               <td></td>
-              <td></td>
-              <th>合計金額</td>
-              <td>¥62,500</td>
+              <th>合計金額</th>
+              <td><p>${customPrice}円</td>
             </tr>
             <tr>
               <td></td>
 
               <th>配送方法</th>
-              <td colspan="2"><select class="form-control" data="pull-right" data-style="text-right" name="delivery_method_id">
+              <td colspan="2"><select class="form-control" data-style="text-right" name="delivery_method_id">
 				<c:forEach var="dmdb" items="${dmdbList}" >
 				<option value="${dmdb.id}" class="text-right"> ${dmdb.name}  　　${dmdb.price}円</option>
 				</c:forEach>
 				</select></td>
             </tr>
-
-
           </tbody>
         </table>
 
       <div class="float-right">
-			<button type="sumbit" class="btn btn-danger btn-lg">
+      <input type="hidden" name="totalPrice" value="${customPrice}">
+			<button type="submit" name="action" class="btn btn-danger btn-lg">
         購入・注文へ</button></div>
         </form>
 	</div><!--/.container-->

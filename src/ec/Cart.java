@@ -34,29 +34,11 @@ public class Cart extends HttpServlet {
 
 		try {
 			String customName = request.getParameter("customName");
-			request.setAttribute("customName", customName);
+			session.setAttribute("customName", customName);
 
 			// 配送方法をDBから取得
 			ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();
 			request.setAttribute("dmdbList", dMDBList);
-
-			//選択されたパーツのIDを型変換し利用
-//			int base = Integer.parseInt(request.getParameter("base"));
-//			int cpu = Integer.parseInt(request.getParameter("cpu"));
-//			int ram = Integer.parseInt(request.getParameter("ram"));
-//			int graphics = Integer.parseInt(request.getParameter("graphics"));
-//			int storage = Integer.parseInt(request.getParameter("storage"));
-//			int os = Integer.parseInt(request.getParameter("os"));
-//			int office= Integer.parseInt(request.getParameter("office"));
-
-//			CustomDataBeans cItemList = new CustomDataBeans();
-//			cItemList.setBase(base);
-//			cItemList.setCpu(cpu);
-//			cItemList.setRam(ram);
-//			cItemList.setGraphics(graphics);
-//			cItemList.setStorage(storage);
-//			cItemList.setOs(os);
-//			cItemList.setOffice(office);
 
 			//カスタマイズ画面で選択されたパーツのIDをLIST化する
 			List<Integer> selectList = new ArrayList<>();
@@ -66,6 +48,7 @@ public class Cart extends HttpServlet {
 			for (int i = 0; i < typeList.size(); i++) {           //パーツの順番通り選択したパーツIDをLISTに入れる
 			String type = typeList.get(i).getItemType();
 			selectList.add(Integer.parseInt(request.getParameter(type)));
+			//session.setAttribute(type,selectList.get(i) );
 			}
 
 			for (int i = 0; i < selectList.size(); i++) {     //選択されたパーツの各情報をパーツ名でそれぞれ格納　　　
@@ -74,6 +57,7 @@ public class Cart extends HttpServlet {
 			ItemDataBeans item = ItemDAO.getItemByItemID(selectList.get(i));
 			request.setAttribute(type, item);
 			}
+
 			request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 
 		} catch (Exception e) {

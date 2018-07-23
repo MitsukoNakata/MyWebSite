@@ -36,16 +36,9 @@
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">商品名</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">${customName}</small>
               </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
+              <span class="text-muted">${bdb.totalPrice}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
@@ -54,34 +47,18 @@
               </div>
               <span class="text-muted">${bdb.deliveryMethodPrice}円</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>合計金額</span>
-              <strong>$20</strong>
+              <strong>${bdb.totalPrice + bdb.deliveryMethodPrice}円</strong>
             </li>
           </ul>
-
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-              </div>
-            </div>
-          </form>
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">お届け先情報</h4>
           <form class="needs-validation" novalidate>
               <div class="mb-3">
                 <label for="Name">お名前</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="${user.id}" required>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="${udb.name}" required>
                 <div class="invalid-feedback">
                   お名前の欄が未入力です.
                 </div>
@@ -89,7 +66,7 @@
             <div class="row">
               <div class="col-md-3">
                 <label for="zip">郵便番号</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
+                <input type="text" class="form-control" id="zip" placeholder="" value="${udb.zipcode}" required>
                 <div class="invalid-feedback">
                   郵便番号の欄が未入力です.
                 </div>
@@ -97,7 +74,7 @@
             </div>
             <div class="mb-3">
               <label for="address">ご住所</label>
-              <input type="text" class="form-control" id="address" placeholder="例：東京都" required>
+              <input type="text" class="form-control" id="address" placeholder="例：東京都" value="${udb.address}" required>
               <div class="invalid-feedback">
                 住所の欄が未入力です。
               </div>
@@ -105,7 +82,7 @@
             <div class="row">
               <div class="col-md-6">
                 <label for="telephone">電話番号</label>
-                <input type="text" class="form-control" id="telephone" placeholder="090-1234-5678" required>
+                <input type="text" class="form-control" id="telephone" placeholder="090-1234-5678" value="${udb.phonenumber}" required>
                 <div class="invalid-feedback">
                   郵便番号の欄が未入力です.
                 </div>
@@ -164,7 +141,7 @@
               </div>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-danger btn-lg btn-block" type="submit">入力した内容を確認する</button>
+            <button class="btn btn-danger btn-lg btn-block" type="submit">入力した内容で注文する</button>
           </form>
         </div>
       </div>

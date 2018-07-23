@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import beans.BuyDataBeans;
 import beans.DeliveryMethodDataBeans;
+import beans.UserDataBeans;
 import dao.DeliveryMethodDAO;
+import dao.UserDAO;
 
 /**
  * 商品購入画面
@@ -23,6 +25,11 @@ import dao.DeliveryMethodDAO;
 public class Buy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+	request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
@@ -31,33 +38,40 @@ public class Buy extends HttpServlet {
 
 			if (!isLogin) {
 				// Sessionにリターンページ情報を書き込む
-				session.setAttribute("returnStrUrl", "Cart");
+				session.setAttribute("returnStrUrl", "Buy");
 				// Login画面にリダイレクト
 				response.sendRedirect("Login");
-
 				return;
 			}
-
 			//選択された配送方法IDを取得
+
+
 			int inputDeliveryMethodId = Integer.parseInt(request.getParameter("delivery_method_id"));
 			//選択されたIDをもとに配送方法Beansを取得
 			DeliveryMethodDataBeans userSelectDMB = DeliveryMethodDAO.getDeliveryMethodDataBeansByID(inputDeliveryMethodId);
-			//買い物かご
-			//ArrayList<ItemDataBeans> cartIDBList = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
-			//合計金額
-			//int totalPrice = EcHelper.getTotalItemPrice(cartIDBList);
+
+			int userId =(int) session.getAttribute("userId");
+
+     		UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
+     		session.setAttribute("udb", udb);
 
 			BuyDataBeans bdb = new BuyDataBeans();
-			bdb.setUserId((int) session.getAttribute("userId"));
-			//sbdb.setTotalPrice(totalPrice);
+			bdb.setUserId(userId);
+			bdb.setCustomName((String) session.getAttribute("customName"));
+			bdb.setTotalPrice(Integer.parseInt(request.getParameter("totalPrice")));
+			bdb.setBase(Integer.parseInt(request.getParameter("base")));
+			bdb.setCpu(Integer.parseInt(request.getParameter("cpu")));
+			bdb.setRam(Integer.parseInt(request.getParameter("ram")));
+			bdb.setGraphics(Integer.parseInt(request.getParameter("graphics")));
+			bdb.setStorage(Integer.parseInt(request.getParameter("storage")));
+			bdb.setOffice(Integer.parseInt(request.getParameter("office")));
+			bdb.setOs(Integer.parseInt(request.getParameter("os")));
 			bdb.setDeliveryMethodId(userSelectDMB.getId());
 			bdb.setDeliveryMethodPrice(userSelectDMB.getPrice());
 			bdb.setDeliveryMethodName(userSelectDMB.getName());
-
-
-
 			//購入確定で利用
 			session.setAttribute("bdb", bdb);
+
 			request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

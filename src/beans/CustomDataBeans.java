@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import dao.ItemDAO;
 
@@ -14,7 +15,7 @@ public class CustomDataBeans implements Serializable {
 	private int id;
 	private String customName;
 	private int customType;
-	private int basicPrice;
+	private int price;
 	private int base;
 	private int cpu;
 	private int ram;
@@ -22,6 +23,8 @@ public class CustomDataBeans implements Serializable {
 	private int storage;
 	private int os;
 	private int office;
+
+	private HashMap <String,Integer> item;
 
 
 	// カスタム別標準構成パーツの価格を取得
@@ -161,13 +164,22 @@ public class CustomDataBeans implements Serializable {
 		this.office = office;
 	}
 
-	public int getBasicPrice() {
-		return basicPrice;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setBasicPrice(int basicPrice) {
-		this.basicPrice = basicPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
+
+	public HashMap<String, Integer> getItem() {
+		return item;
+	}
+
+	public void setItem(HashMap<String, Integer> item) {
+		this.item = item;
+	}
+
 
 
 

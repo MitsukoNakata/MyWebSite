@@ -46,9 +46,9 @@
 		</div>
 		</div><!--/.row-->
 		<div class="row">
-			<div class="col-md-3"><h5>基本構成</h></div>
+			<div class="col-md-3"><h5>基本構成</h5></div>
 			<div class="col-md-7"><h4> ${customitem.customName}</h4></div>
-			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.basicPrice}" type="CURRENCY" pattern="#,###;-#,###" />円〜</div>
+			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}" type="CURRENCY" pattern="#,###;-#,###" />円〜</div>
 			<br><br><br>
 		</div><!--/基本構成タイトル.row-->
 
