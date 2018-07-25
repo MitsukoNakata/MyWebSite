@@ -83,12 +83,10 @@ public class UserDataBeans implements Serializable {
 		this.phonenumber = phonenumber;
 	}
 
-	public void setUpdateUserDataBeansInfo(String name, String email, String zipcode,String address,String phonenumber, int id) {
+	public void setUpdateUserDataBeansInfo(String name, String email ,String address, int id) {
 		this.name = name;
 		this.email = email;
-		this.address = zipcode;
 		this.address = address;
-		this.address = phonenumber;
 		this.id = id;
 	}
 

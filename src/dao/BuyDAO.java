@@ -13,8 +13,7 @@ import beans.BuyDataBeans;
 
 /**
  *
- * @author d-yamaguchi
- *
+ * @author m-takeuchi *
  */
 public class BuyDAO {
 
@@ -31,12 +30,20 @@ public class BuyDAO {
 		try {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
-					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date) VALUES(?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date,base,cpu,ram,graphics,storage,os,office) "
+					+"VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+					,Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, bdb.getUserId());
 			st.setInt(2, bdb.getTotalPrice());
 			st.setInt(3, bdb.getDeliveryMethodId());
 			st.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			st.setInt(5, bdb.getBase());
+			st.setInt(6, bdb.getCpu());
+			st.setInt(7, bdb.getRam());
+			st.setInt(8, bdb.getGraphics());
+			st.setInt(9, bdb.getStorage());
+			st.setInt(10, bdb.getOs());
+			st.setInt(11, bdb.getOffice());
 			st.executeUpdate();
 
 			ResultSet rs = st.getGeneratedKeys();

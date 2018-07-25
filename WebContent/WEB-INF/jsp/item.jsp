@@ -23,7 +23,7 @@
 	<jsp:include page="/baselayout/header.jsp" />
 	<div class ="container">
 		<div class="py-5 text-center">
-        	<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        	<img class="d-block mx-auto mb-4" src="img/logo_w.png" alt="" width="72" height="auto">
         	<h2>商品カスタマイズ</h2>
 
 

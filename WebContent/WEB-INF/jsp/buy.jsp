@@ -38,56 +38,43 @@
                 <h6 class="my-0">商品名</h6>
                 <small class="text-muted">${customName}</small>
               </div>
-              <span class="text-muted">${bdb.totalPrice}</span>
+              <span class="text-muted"><fmt:formatNumber>${bdb.totalPrice}</fmt:formatNumber>円</span>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">配送方法</h6>
                 <small class="text-muted">${bdb.deliveryMethodName}</small>
               </div>
-              <span class="text-muted">${bdb.deliveryMethodPrice}円</span>
+              <span class="text-muted"><fmt:formatNumber>${bdb.deliveryMethodPrice}</fmt:formatNumber>円</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>合計金額</span>
-              <strong>${bdb.totalPrice + bdb.deliveryMethodPrice}円</strong>
+              <fmt:formatNumber>${bdb.totalPrice + bdb.deliveryMethodPrice}</fmt:formatNumber>円
             </li>
           </ul>
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">お届け先情報</h4>
-          <form class="needs-validation" novalidate>
+          <form action="BuyResult" method="POST" class="needs-validation" novalidate>
               <div class="mb-3">
                 <label for="Name">お名前</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="${udb.name}" required>
-                <div class="invalid-feedback">
-                  お名前の欄が未入力です.
+                <input type="text" class="form-control" id="firstName" placeholder="" value="${udb.name}" readonly>
                 </div>
-              </div>
             <div class="row">
               <div class="col-md-3">
                 <label for="zip">郵便番号</label>
-                <input type="text" class="form-control" id="zip" placeholder="" value="${udb.zipcode}" required>
-                <div class="invalid-feedback">
-                  郵便番号の欄が未入力です.
-                </div>
+                <input type="text" class="form-control" id="zip" placeholder="" value="${udb.zipcode}" readonly>
               </div>
             </div>
             <div class="mb-3">
               <label for="address">ご住所</label>
-              <input type="text" class="form-control" id="address" placeholder="例：東京都" value="${udb.address}" required>
-              <div class="invalid-feedback">
-                住所の欄が未入力です。
-              </div>
+              <input type="text" class="form-control" id="address" placeholder="例：東京都" value="${udb.address}" readonly>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label for="telephone">電話番号</label>
-                <input type="text" class="form-control" id="telephone" placeholder="090-1234-5678" value="${udb.phonenumber}" required>
-                <div class="invalid-feedback">
-                  郵便番号の欄が未入力です.
-                </div>
+                <input type="text" class="form-control" id="telephone" placeholder="090-1234-5678" value="${udb.phonenumber}" readonly>
               </div>
-
             </div>
             <hr class="mb-4">
 

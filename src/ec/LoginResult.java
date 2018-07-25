@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.UserDataBeans;
 import dao.UserDAO;
-
 /**
  *
  * @author d-yamaguchi
@@ -36,6 +36,8 @@ public class LoginResult extends HttpServlet {
 
 			//ユーザーIDが取得できたなら
 			if (userId != 0) {
+		        UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
+		 		session.setAttribute("udb", udb);
 				session.setAttribute("isLogin", true);
 				session.setAttribute("userId", userId);
 				//ログイン前のページを取得

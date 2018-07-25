@@ -11,9 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.BuyDataBeans;
 import beans.DeliveryMethodDataBeans;
-import beans.UserDataBeans;
 import dao.DeliveryMethodDAO;
-import dao.UserDAO;
 
 /**
  * 商品購入画面
@@ -26,23 +24,17 @@ public class Buy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	HttpSession session = request.getSession();
+	BuyDataBeans bdb = (BuyDataBeans)session.getAttribute("bdb");
 
+	bdb.setUserId((int) session.getAttribute("userId"));
+	session.setAttribute("bdb", bdb);
 
 	request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
-			//ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
-
-			if (!isLogin) {
-				// Sessionにリターンページ情報を書き込む
-				session.setAttribute("returnStrUrl", "Buy");
-				// Login画面にリダイレクト
-				response.sendRedirect("Login");
-				return;
-			}
 			//選択された配送方法IDを取得
 
 
@@ -50,13 +42,8 @@ public class Buy extends HttpServlet {
 			//選択されたIDをもとに配送方法Beansを取得
 			DeliveryMethodDataBeans userSelectDMB = DeliveryMethodDAO.getDeliveryMethodDataBeansByID(inputDeliveryMethodId);
 
-			int userId =(int) session.getAttribute("userId");
-
-     		UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
-     		session.setAttribute("udb", udb);
-
 			BuyDataBeans bdb = new BuyDataBeans();
-			bdb.setUserId(userId);
+
 			bdb.setCustomName((String) session.getAttribute("customName"));
 			bdb.setTotalPrice(Integer.parseInt(request.getParameter("totalPrice")));
 			bdb.setBase(Integer.parseInt(request.getParameter("base")));
@@ -70,6 +57,20 @@ public class Buy extends HttpServlet {
 			bdb.setDeliveryMethodPrice(userSelectDMB.getPrice());
 			bdb.setDeliveryMethodName(userSelectDMB.getName());
 			//購入確定で利用
+			session.setAttribute("bdb", bdb);
+
+			Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
+			//ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
+
+			if (!isLogin) {
+
+				// Sessionにリターンページ情報を書き込む
+				session.setAttribute("returnStrUrl", "Buy");
+				// Login画面にリダイレクト
+				response.sendRedirect("Login");
+				return;
+				}
+			bdb.setUserId((int) session.getAttribute("userId"));
 			session.setAttribute("bdb", bdb);
 
 			request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
