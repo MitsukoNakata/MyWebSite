@@ -74,7 +74,7 @@
  					 		<c:choose>
  					 		<c:when test="${item.id == customitem[itemType]}">
 	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}" checked>
-	 					 			<label class="form-check-label" for="${item.id}">
+	 					 			<label for="${item.id}">
 					      				 ${item.name}</td>
 				      			</label>
 						 <td>【標準】</td>
@@ -83,8 +83,8 @@
 				      		<c:otherwise>
 				      			<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}">
 	 					 			<label class="form-check-label" for="${item.id}">
-					      				${item.name} </td>
-					      			</label>
+					      				 ${item.name}</td>
+
 
 					      <td>
 					      <fmt:formatNumber value="${item.price - customitem[itemObj].price}" type="CURRENCY" pattern="+#,###;-#,###" />円

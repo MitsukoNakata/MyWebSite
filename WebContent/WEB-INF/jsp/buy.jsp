@@ -16,8 +16,6 @@
 	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <title>注文内容を確認・変更</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
   </head>

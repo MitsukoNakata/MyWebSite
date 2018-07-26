@@ -33,9 +33,7 @@
         <div class="col-md-6 mx-auto">
               <h4 class="mb-3">ログアウトしました</h4>
 				  <hr class="mb-4">
-				 <form class="form-signin text-center" action="Logout" method="POST">
-            	<button class="btn btn btn-lg" type="submit">トップページへ</button>
-            	</form>
+            	<a href="Index" class="btn btn-large col s8 offset-s2">TOPページへ</a>
             	</div>
 
             </div>

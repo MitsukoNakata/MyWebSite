@@ -7,14 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="img/pcrobinfavicon.ico">
-
-
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <title>入力内容確認</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
   </head>
@@ -23,8 +21,8 @@
 	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>入力内容確認</h2>
+        <br><br>
+        <h3>入力内容確認</h3>
 			<c:if test="${validationMessage != null}">
 			<P class="red-text">${validationMessage}</P>
 			</c:if>
@@ -32,7 +30,7 @@
 
         <div class="py5 center-block">
         <div class="col-md-6 mx-auto">
-          <h4 class="mb-3">入力された情報</h4>
+          <h5 class="mb-3">入力された情報</h5>
           <form action="RegistResult" method="POST">
               <div class="mb-3">
                 <label for="Name">お名前</label>

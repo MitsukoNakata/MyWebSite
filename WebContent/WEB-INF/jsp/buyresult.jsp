@@ -8,12 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
-
-
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <title>購入完了</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
@@ -22,8 +21,8 @@
 	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>購入完了</h2>
+        <p></p><p><p/>
+        <h3>購入完了</h3>
 
       </div>
         <div class="py5 center-block">
@@ -36,16 +35,7 @@
             	<a href="UserData"><button class="btn btn-info btn-lg btn-block"name="confirm_button">マイページへ</button></a>
             	</div>
             </div>
-
-
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+	<jsp:include page="/baselayout/footer.jsp" />
     </div>
 
     <!-- Bootstrap core JavaScript

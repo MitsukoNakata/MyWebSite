@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import base.DBManager;
 import beans.BuyDataBeans;
+import beans.ItemDataBeans;
 
 /**
  *
@@ -139,6 +140,46 @@ public class BuyDAO {
 			}
 			System.out.println("searching BuyDataBeans by userID has been completed");
 			return buyDataList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+	public static ArrayList<ItemDataBeans> getItemDataBeansListByBuyId(int buyId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT m_item.id,"
+					+ " m_item.name,"
+					+ " m_item.price"
+					+ " FROM t_buy_detail"
+					+ " JOIN m_item"
+					+ " ON t_buy_detail.item_id = m_item.id"
+					+ " WHERE t_buy_detail.buy_id = ?");
+			st.setInt(1, buyId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<ItemDataBeans> buyDetailItemList = new ArrayList<ItemDataBeans>();
+
+			while (rs.next()) {
+				ItemDataBeans idb = new ItemDataBeans();
+				idb.setId(rs.getInt("id"));
+				idb.setName(rs.getString("name"));
+				idb.setPrice(rs.getInt("price"));
+
+
+				buyDetailItemList.add(idb);
+			}
+
+			System.out.println("searching ItemDataBeansList by BuyID has been completed");
+			return buyDetailItemList;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
 
     <title>登録完了</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
   </head>
@@ -23,12 +23,12 @@
     <div class="container">
       <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>登録完了</h2>
+        <h3>登録完了</h3>
 
       </div>
         <div class="py5 center-block">
         <div class="col-md-6 mx-auto">
-              <h4 class="mb-3">ご登録ありがとうございます</h4>
+              <h5 class="mb-3">ご登録ありがとうございます</h5>
             <div class="mb-3">
               ログイン用メールアドレス：${udb.email}
               </div>
