@@ -53,6 +53,7 @@ public class Buy extends HttpServlet {
 			bdb.setStorage(Integer.parseInt(request.getParameter("storage")));
 			bdb.setOffice(Integer.parseInt(request.getParameter("office")));
 			bdb.setOs(Integer.parseInt(request.getParameter("os")));
+			bdb.setAssemble(Integer.parseInt(request.getParameter("assemble")));
 			bdb.setDeliveryMethodId(userSelectDMB.getId());
 			bdb.setDeliveryMethodPrice(userSelectDMB.getPrice());
 			bdb.setDeliveryMethodName(userSelectDMB.getName());

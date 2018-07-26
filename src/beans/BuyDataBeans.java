@@ -24,6 +24,7 @@ public class BuyDataBeans  implements Serializable {
 	private int storage;
 	private int os;
 	private int office;
+	private int assemble;
 
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
@@ -125,6 +126,13 @@ public class BuyDataBeans  implements Serializable {
 	public void setDeliveryMethodPrice(int deliveryMethodPrice) {
 		this.deliveryMethodPrice = deliveryMethodPrice;
 	}
+	public int getAssemble() {
+		return assemble;
+	}
+	public void setAssemble(int assemble) {
+		this.assemble = assemble;
+	}
+
 
 
 }

@@ -46,6 +46,7 @@ public class CustomDAO {
 						item.setStorage(rs.getInt("storage"));
 						item.setOs(rs.getInt("os"));
 						item.setOffice(rs.getInt("office"));
+						item.setAssemble(rs.getInt("assemble"));
 
 
 					}

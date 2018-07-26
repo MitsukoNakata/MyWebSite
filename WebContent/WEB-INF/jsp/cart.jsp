@@ -11,6 +11,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 <style type="text/css"><!--
 /*ここに調整CSS記述*/
  #validationMessage {
@@ -37,8 +41,7 @@
 
     <title>カート</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+
 
   </head>
 
@@ -49,7 +52,7 @@
 		<div class="py-5 text-center">
 
         	<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        	<h2>カートの中</h2>
+        	<h3>カートの中</h3>
         </div>
 	<form action="Buy" method="POST">
         <table class="table">
@@ -73,9 +76,9 @@
 				  ・${requestScope[itemType].name}</p>
 				</c:forEach>
               </td>
-				<td>${customPrice}
-				<td>1
-				<td>${customPrice}</td>
+				<td><fmt:formatNumber>${customPrice}</fmt:formatNumber></td>
+				<td>1</td>
+				<td><fmt:formatNumber>${customPrice}</fmt:formatNumber></td>
             </tr>
              <tr>
 
@@ -84,7 +87,7 @@
 
               <td></td>
               <th>合計金額</th>
-              <td><p>${customPrice}円</td>
+              <td><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</td>
             </tr>
             <tr>
               <td></td>
@@ -100,17 +103,18 @@
         </table>
 
       <div class="float-right">
-      <input type="hidden" name="totalPrice" value="${customPrice}">
+     <input type="hidden" name="totalPrice" value="${customPrice}">
 			<button type="submit" name="action" class="btn btn-danger btn-lg">
         購入・注文へ</button></div>
         </form>
+        <jsp:include page="/baselayout/footer.jsp" />
 	</div><!--/.container-->
 
 
       <br><br><br>
-      <p class="text-center mt-5 mb-3 text-muted">&copy; 2018</p>
 
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="ttps://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"><\/script>')</script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>

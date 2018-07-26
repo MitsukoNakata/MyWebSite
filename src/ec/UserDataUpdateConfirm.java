@@ -33,13 +33,16 @@ public class UserDataUpdateConfirm extends HttpServlet {
 
 			//入力フォームから受け取った値をBeans偽っと
 			UserDataBeans udb = new UserDataBeans();
-			udb.setUpdateUserDataBeansInfo(request.getParameter("user_name"),request.getParameter("email"),request.getParameter("user_address"), (int) session.getAttribute("userId"));
-
-
+			udb.setUpdateUserDataBeansInfo(request.getParameter("user_name"),
+					request.getParameter("user_email"),
+					request.getParameter("user_phonenumber"),
+					request.getParameter("user_zipcode"),
+					request.getParameter("user_address"),
+					(int) session.getAttribute("userId"));
 			//ログインIDの入力規則チェック 英数字 ハイフン アンダースコアのみ入力可能
 			//loginIdの重複をチェック
 			if ( UserDAO.isOverlapEmail(udb.getEmail(),(int) session.getAttribute("userId"))) {
-				validationMessage = "ほかのユーザーが使用中のログインIDです";
+				validationMessage = "ほかのユーザーが使用中のメールアドレスです";
 			}
 
 			//バリデーションエラーメッセージがないなら確認画面へ

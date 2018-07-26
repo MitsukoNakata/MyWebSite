@@ -47,17 +47,26 @@
 							</c:if>
 							<br> <br>
 							<div class="row">
-								<div class="input-field col s6">
-									お名前
+								<div class="input-field col s4">
+									名前
 									<input type="text" name="user_name" value="${udb.name}">
 								</div>
-								<div class="input-field col s6">
+								<div class="input-field col s4">
 								メールアドレス
-									<input type="text" name="email" value="${udb.email}">
+									<input type="text" name="user_email" value="${udb.email}">
 								</div>
+								<div class="input-field col s4">
+								電話番号
+									<input type="text" name="user_phonenumber" value="${udb.phonenumber}">
+								</div>
+
 							</div>
 							<div class="row">
-								<div class="input-field col s12">
+								<div class="input-field col-2">
+								郵便番号
+									<input type="text" name="user_zipcode" value="${udb.zipcode}">
+								</div>
+								<div class="input-field col-10">
 								ご住所
 									<input type="text" name="user_address" value="${udb.address}">
 								</div>
@@ -103,14 +112,7 @@
 		</div>
 	</div>
 
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+  <jsp:include page="/baselayout/footer.jsp" />
 
 
     <!-- Bootstrap core JavaScript

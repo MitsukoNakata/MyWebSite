@@ -8,6 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="css/signin.css" >
     <title>ログアウト</title>
 
     <!-- Bootstrap core CSS -->
@@ -23,23 +28,20 @@
         <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 
       </div>
+      	<div class="container">
         <div class="py5 center-block">
         <div class="col-md-6 mx-auto">
               <h4 class="mb-3">ログアウトしました</h4>
-            <hr class="mb-4">
-            	<a href="Index"><button class="btn btn-info btn-lg btn-block"name="confirm_button">トップページへ</button></a>
+				  <hr class="mb-4">
+				 <form class="form-signin text-center" action="Logout" method="POST">
+            	<button class="btn btn btn-lg" type="submit">トップページへ</button>
+            	</form>
             	</div>
+
             </div>
+			</div>
 
-
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+<jsp:include page="/baselayout/footer.jsp" />
     </div>
 
     <!-- Bootstrap core JavaScript

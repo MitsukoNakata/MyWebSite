@@ -11,12 +11,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
 
     <title>商品カスタマイズ</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
   </head>
   <body class="bg-light">
@@ -26,10 +29,7 @@
         	<img class="d-block mx-auto mb-4" src="img/logo_w.png" alt="" width="72" height="auto">
         	<h2>商品カスタマイズ</h2>
 
-
         </div>
-
-
 		<div class="row">
 		<div id="img" class="col-md-5">
 		<img src="img/custom/main_pc_201801.png" width="300" height="auto">
@@ -37,7 +37,7 @@
 
 		</div>
 		<div id="img" class="col-md-7">
-		<h3>2018年最新モデルABX</h3>
+		<h4>2018年最新モデルABX</h4>
 		<br>
 		<p>PC Robinのオールインワンパソコンが新しく生まれ変わりました。
     <br>奥行きわずか19cmのコンパクト筐体にインテリアにもなる落ち着きのあるデザイン。
@@ -47,7 +47,7 @@
 		</div><!--/.row-->
 		<div class="row">
 			<div class="col-md-3"><h5>基本構成</h5></div>
-			<div class="col-md-7"><h4> ${customitem.customName}</h4></div>
+			<div class="col-md-7"><h5> ${customitem.customName}</h5></div>
 			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}" type="CURRENCY" pattern="#,###;-#,###" />円〜</div>
 			<br><br><br>
 		</div><!--/基本構成タイトル.row-->
@@ -55,7 +55,7 @@
 		<form action="Cart" method="POST">
 		<c:forEach var="type" items="${typeList}">
 		<div class="row">
-			<div id="img" class="col-md-2"><img src="img/custom/${type.fileName}"></div>
+			<div id="img" class="col-md-2"><img src="img/custom/${type.fileName}" height="84" width="auto"></div>
 			<div id="categoty" class="col-md-10">
 				<table class="table table-hover">
 				  <thead>
@@ -103,17 +103,14 @@
 
 			<div class="float-right">
 			<input type="hidden" name="customName" value="${customitem.customName}">
-			<button class="btn btn-danger btn-lg" type="sumbit" >カートへ
-            <img src="https://png.icons8.com/material/50/000000/shopping-cart.png"　width="auto" height="25"></button>
+			<button class="btn btn-danger btn-lg" type="submit" >カートへ
+            <img src="https://png.icons8.com/material/50/000000/shopping-cart.png" width="auto" height="25"></button></div>
         </form>
-        </div>
-
-
-
+        <jsp:include page="/baselayout/footer.jsp" />
 	</div><!--/.container-->
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="ttps://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"><\/script>')</script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>

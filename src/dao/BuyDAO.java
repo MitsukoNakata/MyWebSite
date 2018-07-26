@@ -30,8 +30,8 @@ public class BuyDAO {
 		try {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
-					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date,base,cpu,ram,graphics,storage,os,office) "
-					+"VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date,base,cpu,ram,graphics,storage,os,office,assemble) "
+					+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
 					,Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, bdb.getUserId());
 			st.setInt(2, bdb.getTotalPrice());
@@ -44,6 +44,7 @@ public class BuyDAO {
 			st.setInt(9, bdb.getStorage());
 			st.setInt(10, bdb.getOs());
 			st.setInt(11, bdb.getOffice());
+			st.setInt(12, bdb.getAssemble());
 			st.executeUpdate();
 
 			ResultSet rs = st.getGeneratedKeys();

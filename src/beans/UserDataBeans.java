@@ -83,9 +83,11 @@ public class UserDataBeans implements Serializable {
 		this.phonenumber = phonenumber;
 	}
 
-	public void setUpdateUserDataBeansInfo(String name, String email ,String address, int id) {
+	public void setUpdateUserDataBeansInfo(String name, String email,String phonenumber,String zipcode,String address, int id) {
 		this.name = name;
 		this.email = email;
+		this.phonenumber = phonenumber;
+		this.zipcode = zipcode;
 		this.address = address;
 		this.id = id;
 	}

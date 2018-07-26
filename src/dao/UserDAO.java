@@ -153,7 +153,7 @@ public class UserDAO {
 		try {
 
 			con = DBManager.getConnection();
-			st = con.prepareStatement("UPDATE t_user SET name=?, email=?, zipcode=?, address=? ,phone_number=?, WHERE id=?;");
+			st = con.prepareStatement("UPDATE t_user SET name= ?, email= ?, zipcode= ?, address= ? ,phone_number= ? WHERE id = ? ");
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getEmail());
 			st.setString(3, udb.getZipcode());

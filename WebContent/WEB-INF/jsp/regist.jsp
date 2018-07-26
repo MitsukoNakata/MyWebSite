@@ -9,6 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<style>
   	#validationMessage {
    	 font-size: 80%;
@@ -89,20 +93,14 @@
               </div>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-info btn-lg btn-block" type="submit">入力した内容を確認する</button>
+            <button class="btn btn-lg btn-block" type="submit">入力した内容を確認する</button>
           </form>
         </div>
       </div>
+      <jsp:include page="/baselayout/footer.jsp" />
 	</div>
 	</main>
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+
 
 
     <!-- Bootstrap core JavaScript

@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-   	<div class="container">
       <a class="navbar-brand" href="Index"><img src="img/logo_w.png" width="70" height=auto></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,5 +26,4 @@
           <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="例:core i7" aria-label="Search">
         </form> -->
       </div>
-     </div>
     </nav>

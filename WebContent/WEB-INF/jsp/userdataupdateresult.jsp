@@ -35,50 +35,50 @@
 	<br><br><br><br><br>
 	<div class="container">
 		<div class="row center">
-			<h5 class=" col s12 light">入力内容確認</h5>
+			<h5 class=" col s12 light">更新完了</h5>
 		</div>
 		<div class="row">
+			<div class="section"></div>
 			<div class="col s12">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-						<form action="UserDataUpdateResult" method="POST">
-							<div class="row">
+						<div class="row">
 								<div class="input-field col s4">
 									名前
-									<input type="text" name="user_name_update" value="${udb.name}" readonly>
+									<input type="text" value="${udb.name}" readonly>
 								</div>
 								<div class="input-field col s4">
 								メールアドレス
-									<input type="text" name="user_email_update" value="${udb.email}" readonly>
+									<input type="text" value="${udb.email}" readonly>
 								</div>
 								<div class="input-field col s4">
 								電話番号
-									<input type="text" name="user_phonenumber_update" value="${udb.phonenumber}" readonly>
+									<input type="text" value="${udb.phonenumber}" readonly>
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="input-field col-2">
 								郵便番号
-									<input type="text" name="user_zipcode_update" value="${udb.zipcode}" readonly>
+									<input type="text" value="${udb.zipcode}" readonly>
 								</div>
 								<div class="input-field col-10">
 								ご住所
-									<input type="text" name="user_address_update" value="${udb.address}" readonly>
+									<input type="text" value="${udb.address}" readonly>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col s12">
-									<div class="col s6 center-align">
-										<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="cancel">戻る</button>
-									</div>
-
-									<div class="col s6 center-align">
-										<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="update">更新</button>
-									</div>
-								</div>
+						<div class="row">
+							<div class="col s12">
+								<p class="center-align">上記内容で更新しました</p>
 							</div>
-						</form>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<p class="center-align">
+									<a href="UserData" class="btn waves-effect waves-light  col s4 offset-s4">ユーザー情報へ</a>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -104,29 +104,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-    <script src="js/validator.js"></script>
-    <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function() {
-        'use strict';
 
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
-    </script>
 
   </body>
 </html>

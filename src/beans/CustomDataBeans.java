@@ -23,6 +23,7 @@ public class CustomDataBeans implements Serializable {
 	private int storage;
 	private int os;
 	private int office;
+	private int assemble;
 
 	private HashMap <String,Integer> item;
 
@@ -35,6 +36,7 @@ public class CustomDataBeans implements Serializable {
 	private ItemDataBeans storageItem;
 	private ItemDataBeans osItem;
 	private ItemDataBeans officeItem;
+	private ItemDataBeans assembleItem;
 
 	public ItemDataBeans getBaseItem() {
 
@@ -97,6 +99,16 @@ public class CustomDataBeans implements Serializable {
 
 		try {
 			return ItemDAO.getItemByItemID(this.office);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ItemDataBeans getAssembleItem() {
+
+		try {
+			return ItemDAO.getItemByItemID(this.assemble);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -178,6 +190,14 @@ public class CustomDataBeans implements Serializable {
 
 	public void setItem(HashMap<String, Integer> item) {
 		this.item = item;
+	}
+
+	public int getAssemble() {
+		return assemble;
+	}
+
+	public void setAssemble(int assemble) {
+		this.assemble = assemble;
 	}
 
 
