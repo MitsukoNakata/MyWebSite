@@ -19,6 +19,7 @@
   </head>
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
+	<br><br>
     <div class="container">
       <div class="py-5 text-center">
         <p></p><p><p/>

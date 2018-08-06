@@ -68,12 +68,20 @@ public class ItemDAO {
 			try {
 				con = DBManager.getConnection();
 
+				if(itemType.equals("all")) {
 				st = con.prepareStatement("SELECT * " +
 						"FROM m_item " +
 						"JOIN m_item_type " +
-						"ON m_item.item_type = m_item_type.id " +
-						"WHERE m_item_type.type_category = ? ");
-				st.setString(1, itemType);
+						"ON m_item.item_type = m_item_type.id");
+				}else {
+					st = con.prepareStatement("SELECT * " +
+					"FROM m_item " +
+					"JOIN m_item_type " +
+					"ON m_item.item_type = m_item_type.id "+
+					"WHERE m_item_type.type_category = ? ");
+					st.setString(1, itemType);
+				}
+
 
 				ResultSet rs = st.executeQuery();
 
@@ -85,7 +93,9 @@ public class ItemDAO {
 					item.setName(rs.getString("name"));
 					item.setItemType(rs.getString("type_name"));
 					item.setPrice(rs.getInt("price"));
-					//item.setFileName(rs.getString("file_name"));
+					item.setLink(rs.getString("link"));
+					item.setSoket(rs.getString("soket"));
+					item.setRamType(rs.getString("ram_type"));
 					itemList.add(item);
 				}
 				System.out.println("getAllItem completed");

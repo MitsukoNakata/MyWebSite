@@ -25,7 +25,14 @@ public class BuyDataBeans  implements Serializable {
 	private int os;
 	private int office;
 	private int assemble;
-
+	private String baseName;
+	private String cpuName;
+	private String ramName;
+	private String graphicsName;
+	private String storageName;
+	private String osName;
+	private String officeName;
+	private String assembleName;
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
 
@@ -131,6 +138,54 @@ public class BuyDataBeans  implements Serializable {
 	}
 	public void setAssemble(int assemble) {
 		this.assemble = assemble;
+	}
+	public String getBaseName() {
+		return baseName;
+	}
+	public void setBaseName(String baseName) {
+		this.baseName = baseName;
+	}
+	public String getCpuName() {
+		return cpuName;
+	}
+	public void setCpuName(String cpuName) {
+		this.cpuName = cpuName;
+	}
+	public String getRamName() {
+		return ramName;
+	}
+	public void setRamName(String ramName) {
+		this.ramName = ramName;
+	}
+	public String getGraphicsName() {
+		return graphicsName;
+	}
+	public void setGraphicsName(String graphicsName) {
+		this.graphicsName = graphicsName;
+	}
+	public String getStorageName() {
+		return storageName;
+	}
+	public void setStorageName(String storageName) {
+		this.storageName = storageName;
+	}
+	public String getOsName() {
+		return osName;
+	}
+	public void setOsName(String osName) {
+		this.osName = osName;
+	}
+	public String getOfficeName() {
+		return officeName;
+	}
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
+	}
+	public String getAssembleName() {
+		return assembleName;
+	}
+	public void setAssembleName(String assembleName) {
+		this.assembleName = assembleName;
 	}
 
 

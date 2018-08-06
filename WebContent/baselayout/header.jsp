@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -11,6 +12,9 @@
 			<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false; %>
 
 			<%--li class="nav-item"><a class="nav-link" href="Cart"><img src="img/cart.png"> Cart</a></li--%>
+			<c:if test ="${userId == 1}">
+			<li class="nav-item"><a class="nav-link" href="MasterPage"><img src="img/edit.png">Management</a></li>
+			</c:if>
 			<%if(isLogin){ %>
 			<li class="nav-item"><a class="nav-link" href="UserData"><img src="img/mypage.png"> My Account</a></li>
 			<%}else{ %>

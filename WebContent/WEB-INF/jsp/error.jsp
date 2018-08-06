@@ -17,14 +17,15 @@
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
 
-
 	<div class="container">
+        <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
 		<div class="row">
 			<div class="col s8 offset-s2">
 				<div class="card grey lighten-5">
 					<div class="card-content">
 						<div class="row center">
 							<h4 class="red-text">システムエラーが発生しました</h4>
+							<p></p>
 							<h5 class="red-text">${errorMessage}</h5>
 						</div>
 						<div class="row">

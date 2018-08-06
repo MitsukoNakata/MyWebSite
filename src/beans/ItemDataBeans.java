@@ -14,6 +14,9 @@ public class ItemDataBeans implements Serializable {
 	private int price;
 	private String fileName;
 	private int itemNum;
+	private String link;
+	private String soket;
+	private String ramType;
 
 
 	public int getId() {
@@ -51,6 +54,24 @@ public class ItemDataBeans implements Serializable {
 	}
 	public void setItemNum(int itemNum) {
 		this.itemNum = itemNum;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getSoket() {
+		return soket;
+	}
+	public void setSoket(String soket) {
+		this.soket = soket;
+	}
+	public String getRamType() {
+		return ramType;
+	}
+	public void setRamType(String ramType) {
+		this.ramType = ramType;
 	}
 
 

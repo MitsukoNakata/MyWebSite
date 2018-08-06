@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.UserDataBeans;
-import dao.UserDAO;
 
 /**
  * ユーザー登録完了画面

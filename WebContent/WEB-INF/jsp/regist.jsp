@@ -19,9 +19,6 @@
 	  }
 	</style>
     <title>新規登録</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/form-validation.css" >
   </head>
@@ -30,12 +27,14 @@
 	<main role="main">
 	<div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>新規登録</h2>
+        <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+        <h4>新規登録</h4>
       </div>
         <div class="was-validated py5 center-block">
+
         <div class="col-md-6 mx-auto">
-          <h4 class="mb-3">登録情報</h4>
+          <h5 class="mb-3">登録情報</h5>
+
           <form action="RegistConfirm" method="POST" class="needs-validation" novalidate>
               <div class="form-group mb-3">
                 <label for="Name">お名前</label>

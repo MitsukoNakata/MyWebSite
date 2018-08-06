@@ -19,7 +19,7 @@ import dao.ItemDAO;
 
 /**
  * 商品画面
- * @author d
+ * @author
  * t-takeuchi
  *
  */

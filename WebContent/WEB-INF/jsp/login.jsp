@@ -14,8 +14,6 @@
 	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <title>会員ログイン</title>
-
-
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/signin.css" >
   </head>
@@ -23,7 +21,7 @@
 	<jsp:include page="/baselayout/header.jsp" />
 	<div class="container">
       <form class="form-signin text-center" action="LoginResult" method="POST">
-      <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
 
       <h1 class="h3 mb-3 font-weight-normal">会員様ログイン</h1>
 		<c:if test="${loginErrorMessage != null}">

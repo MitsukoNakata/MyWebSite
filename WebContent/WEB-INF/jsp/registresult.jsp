@@ -21,8 +21,8 @@
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
-      <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <div class="py-5 text-center">
+        	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
         <h3>登録完了</h3>
 
       </div>

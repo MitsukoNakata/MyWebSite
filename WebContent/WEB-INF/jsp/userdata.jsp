@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="jpn">
   <head>
@@ -9,26 +10,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
-	<style>
-  	#validationMessage {
-   	 font-size: 80%;
-	  }
-	 .card-content>span{
-	font-size:18px !important;
-	height:150px;
-	}
-	</style>
-    <title>マイページ</title>
-
-    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="css/form-validation.css" >
+	 <title>マイページ</title>
   </head>
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
@@ -101,7 +87,7 @@
 									<td class="center"><a href="UserBuyHistoryDetail?buy_id=${BuyData.id}" class="btn-floating btn waves-effect waves-light "> <i class="material-icons">details</i></a></td>
 									<td class="center">${BuyData.formatDate}</td>
 									<td class="center">${BuyData.deliveryMethodName}</td>
-									<td class="center">${BuyData.totalPrice}円</td>
+									<td class="center"><fmt:formatNumber value="${BuyData.totalPrice}"/>円</td>
 								</tr>
 								</c:forEach>
 							</tbody>

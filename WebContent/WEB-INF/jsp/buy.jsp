@@ -25,14 +25,14 @@
     <div class="container">
 
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h2>注文内容を確認・変更する</h2>
+        <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+        <h4>注文内容を確認・変更する</h4>
       </div>
       <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <div class="col-md-5 order-md-2 mb-4">
+          <h5 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">カートの内容</span>
-          </h4>
+          </h5>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
@@ -54,8 +54,8 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">お届け先情報</h4>
+        <div class="col-md-7 order-md-1">
+          <h5 class="mb-3">お届け先情報</h5>
           <form action="BuyResult" method="POST" class="needs-validation" novalidate>
               <div class="mb-3">
                 <label for="Name">お名前</label>
@@ -79,7 +79,7 @@
             </div>
             <hr class="mb-4">
 
-            <h4 class="mb-3">お支払い方法</h4>
+            <h5 class="mb-3">お支払い方法</h5>
 
             <div class="d-block my-3">
               <div class="custom-control custom-radio">

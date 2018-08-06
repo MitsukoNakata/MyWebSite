@@ -9,9 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/favicon.ico">
+    <link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
     <title>PC Robin</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+
 	<link rel="stylesheet" href="dist/css/custom.css">
 
   </head>

@@ -6,49 +6,36 @@
 <!doctype html>
 <html lang="jpn">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-
-
+<jsp:include page="/baselayout/head.html" />
     <title>商品カスタマイズ</title>
-
-    <!-- Bootstrap core CSS -->
-
   </head>
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
 	<div class ="container">
 		<div class="py-5 text-center">
-        	<img class="d-block mx-auto mb-4" src="img/logo_w.png" alt="" width="72" height="auto">
-        	<h2>商品カスタマイズ</h2>
+        	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+        	<h3>商品カスタマイズ</h3>
 
         </div>
 		<div class="row">
-		<div id="img" class="col-md-5">
+		<div id="img" class="col-md-6">
 		<img src="img/custom/main_pc_201801.png" width="300" height="auto">
 		<br><br>
-
 		</div>
-		<div id="img" class="col-md-7">
-		<h4>2018年最新モデルABX</h4>
+		<div class="col-md-6">
+		<h5>【2018年最新モデルABX】</h5>
+		
 		<br>
 		<p>PC Robinのオールインワンパソコンが新しく生まれ変わりました。
-    <br>奥行きわずか19cmのコンパクト筐体にインテリアにもなる落ち着きのあるデザイン。
-    <br>第8世代インテル® Core™ i7プロセッサーを搭載可能、優れたパフォーマンスを発揮します。
-    <br>今ならメモリー8GBモデルが大変オトクです。</p>
+    	奥行きわずか19cmのコンパクト筐体にインテリアにもなる落ち着きのあるデザイン。
+    	第8世代インテル® Core™ i7プロセッサーを搭載可能、優れたパフォーマンスを発揮します。
+    	今ならメモリー8GBモデルが大変オトクです。</p>
 		</div>
 		</div><!--/.row-->
 		<div class="row">
 			<div class="col-md-3"><h5>基本構成</h5></div>
 			<div class="col-md-7"><h5> ${customitem.customName}</h5></div>
-			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}" type="CURRENCY" pattern="#,###;-#,###" />円〜</div>
+			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}"/>円〜</div>
 			<br><br><br>
 		</div><!--/基本構成タイトル.row-->
 
@@ -68,31 +55,29 @@
 				  <c:set var="itemType" value="${type.itemType}" />
 				  <c:set var="itemObj" value="${type.itemType}Item" />
 				 <c:forEach var="item" items="${requestScope[itemType]}">
+				 <div class="form-check">
 				    <tr>
 				      <td scope="row">
-				      	<div class="form-check">
  					 		<c:choose>
- 					 		<c:when test="${item.id == customitem[itemType]}">
+ 					 			<c:when test="${item.id == customitem[itemType]}">
 	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}" checked>
-	 					 			<label for="${item.id}">
-					      				 ${item.name}</td>
-				      			</label>
-						 <td>【標準】</td>
+	 					 			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
+	 					 			</td>
+									 <td><label for="${item.id}">【標準】</label></td>
 				    </tr>
-				      		</c:when>
+				      			</c:when>
 				      		<c:otherwise>
 				      			<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}">
-	 					 			<label class="form-check-label" for="${item.id}">
-					      				 ${item.name}</td>
+					      			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
 
-
-					      <td>
-					      <fmt:formatNumber value="${item.price - customitem[itemObj].price}" type="CURRENCY" pattern="+#,###;-#,###" />円
-					      </td> <%-- 標準構成パーツとの差額 --%>
+	 					 			</td>
+							      <td><label class="control-label" for="${item.id}">
+							      <fmt:formatNumber value="${item.price - customitem[itemObj].price}" type="CURRENCY" pattern="+#,###;-#,###"/>円</label>
+							      </td> <%-- 標準構成パーツとの差額 --%>
 				    </tr>
 				    	</c:otherwise>
 					   	</c:choose>
-					   	</div>
+				</div>
 				    </c:forEach>
 				  	</tbody>
 				 </table>

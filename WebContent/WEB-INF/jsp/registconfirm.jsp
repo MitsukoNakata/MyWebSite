@@ -13,24 +13,19 @@
 	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <title>入力内容確認</title>
-    <!-- Custom styles for this template -->
-    <link href="css/form-validation.css" rel="stylesheet">
   </head>
 
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
-      <div class="py-5 text-center">
-        <br><br>
-        <h3>入力内容確認</h3>
-			<c:if test="${validationMessage != null}">
-			<P class="red-text">${validationMessage}</P>
-			</c:if>
+        <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+        <h4>入力内容確認</h4>
       </div>
 
-        <div class="py5 center-block">
         <div class="col-md-6 mx-auto">
           <h5 class="mb-3">入力された情報</h5>
+
           <form action="RegistResult" method="POST">
               <div class="mb-3">
                 <label for="Name">お名前</label>

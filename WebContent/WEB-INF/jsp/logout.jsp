@@ -3,40 +3,17 @@
 <!doctype html>
 <html lang="jpn">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link rel="stylesheet" href="css/signin.css" >
-    <title>ログアウト</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/form-validation.css" rel="stylesheet">
+<jsp:include page="/baselayout/head.html" />
+    <title>ログアウトページ</title>
   </head>
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
     <div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-
-      </div>
-      	<div class="container">
-        <div class="py5 center-block">
-        <div class="col-md-6 mx-auto">
-              <h4 class="mb-3">ログアウトしました</h4>
+       <img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+              <h4>ログアウトしました</h4>
 				  <hr class="mb-4">
-            	<a href="Index" class="btn btn-large col s8 offset-s2">TOPページへ</a>
-            	</div>
-
-            </div>
+            	<a href="Index" class="btn btn-danger btn-lg">TOPページへ</a>
 			</div>
 
 <jsp:include page="/baselayout/footer.jsp" />

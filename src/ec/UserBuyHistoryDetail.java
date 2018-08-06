@@ -1,6 +1,7 @@
 package ec;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.BuyDataBeans;
-import beans.UserDataBeans;
+import beans.ItemDataBeans;
 import dao.BuyDAO;
-import dao.UserDAO;
+import dao.ItemDAO;
 
 /**
  * 購入履歴画面
@@ -31,16 +32,17 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		try {
 			// ログイン時に取得したユーザーIDをセッションから取得
 			int userId = (int) session.getAttribute("userId");
-			 String str= request.getParameter("buy_id");
-		    int id = Integer.parseInt(str);
-
-			// 更新確認画面から戻ってきた場合Sessionから取得。それ以外はuserIdでユーザーを取得
-			UserDataBeans udb = session.getAttribute("returnUDB") == null ? UserDAO.getUserDataBeansByUserId(userId) : (UserDataBeans) EcHelper.cutSessionAttribute(session, "returnUDB");
-
+		    int buyId = Integer.parseInt(request.getParameter("buy_id"));
 
 			//合計用購入情報
-			BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(id);
+			BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(buyId,userId);
 			request.setAttribute("resultBDB", resultBDB);
+
+			//------パーツのリストを取得
+			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
+			//リクエストスコープにセット
+			request.setAttribute("typeList", typeList);
+
 
 
 			// 購入アイテム情報

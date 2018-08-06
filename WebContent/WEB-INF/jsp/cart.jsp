@@ -51,8 +51,8 @@
   <div class ="container">
 		<div class="py-5 text-center">
 
-        	<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        	<h3>カートの中</h3>
+        	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
+        	<h4>カートの中</h4>
         </div>
 	<form action="Buy" method="POST">
         <table class="table">

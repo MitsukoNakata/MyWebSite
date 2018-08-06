@@ -49,6 +49,14 @@ public class EcHelper {
 	static final String REGIST_CONFIRM_PAGE = "/WEB-INF/jsp/registconfirm.jsp";
 	// 新規登録完了
 	static final String REGIST_RESULT_PAGE = "/WEB-INF/jsp/registresult.jsp";
+	// 管理者専用ページ
+	static final String MASTER_PAGE = "/WEB-INF/jsp/masterpage.jsp";
+	// 管理者用商品編集ページ
+	static final String ITEM_EDIT_PAGE = "/WEB-INF/jsp/master_item_edit.jsp";
+	// 管理者用カスタムメニュー編集ページ
+	static final String CUSTOM_EDIT_PAGE = "/WEB-INF/jsp/master_custom_edit.jsp";
+
+
 
 	public static EcHelper getInstance() {
 		return new EcHelper();
