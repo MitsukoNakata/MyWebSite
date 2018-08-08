@@ -38,19 +38,21 @@ public class Item extends HttpServlet {
 			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
 			//リクエストスコープにセット
 			request.setAttribute("typeList", typeList);
+
 			//-----カスタムメニューの基本パーツを取得
 			int id = Integer.parseInt(request.getParameter("item_id"));
 			CustomDataBeans customItemList= CustomDAO.getCustomItemList(id);
 			//リクエストスコープにセット
 			request.setAttribute("customitem", customItemList);
 
-			//-------パーツリストからパーツ名を取得しパーツ別の商品リストを取得
+			//-------パーツリストからパーツ名を取得しパーツ別の商品リストを取得し
+			//各パーツでリクエストスコープに格納を繰り返す。
 			for (int i = 0; i < typeList.size(); i++) {
 			String type = typeList.get(i).getItemType();
 			ArrayList<ItemDataBeans>itemList= ItemDAO.getByItemType(type);
 			request.setAttribute(type, itemList);
-
 			}
+
 			request.getRequestDispatcher(EcHelper.ITEM_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

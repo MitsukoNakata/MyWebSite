@@ -30,6 +30,11 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		// セッション開始
 		HttpSession session = request.getSession();
 		try {
+			//不正アクセス対策
+			if(session.getAttribute("userId") == null) {
+				response.sendRedirect("Login");
+				 return;
+			}
 			// ログイン時に取得したユーザーIDをセッションから取得
 			int userId = (int) session.getAttribute("userId");
 		    int buyId = Integer.parseInt(request.getParameter("buy_id"));
@@ -42,24 +47,6 @@ public class UserBuyHistoryDetail extends HttpServlet {
 			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
 			//リクエストスコープにセット
 			request.setAttribute("typeList", typeList);
-
-
-
-			// 購入アイテム情報
-			//ArrayList<ItemDataBeans> buyIDBList = BuyDAO.getItemDataBeansListByBuyId(id);
-			//request.setAttribute("buyIDBList", buyIDBList);
-
-
-//
-//			// 入力された内容に誤りがあったとき等に表示するエラーメッセージを格納する
-//			String validationMessage = (String) EcHelper.cutSessionAttribute(session, "validationMessage");
-//			request.setAttribute("validationMessage", validationMessage);
-//			request.setAttribute("udb", udb);
-//			request.setAttribute("buyDataList", buyDataList);
-//
-//	     BuyDAO buyDAO = new BuyDAO();
-//	    BuyDataBeans resultBDB = buyDAO.getBuyDataBeansByBuyId(id);
-//		request.setAttribute("resultBDB", resultBDB);
 
 		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 		} catch (Exception e) {

@@ -15,7 +15,7 @@ import dao.ItemDAO;
 
 /**
  * 商品画面
- * @author d-yamaguchi
+ * @author m-takeuchi
  *
  */
 @WebServlet("/MasterItemEdit")
@@ -28,17 +28,29 @@ public class MasterItemEdit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+			//不正アクセス対策
+			if(session.getAttribute("userId") == null || (int)session.getAttribute("userId")!= 1) {
+				response.sendRedirect("Login");
+				 return;
+			}else {
 			//選択された商品のIDを型変換し利用
-			String itemType = request.getParameter("itemType");
-			//戻るページ表示用
-			ArrayList<ItemDataBeans>itemList= ItemDAO.getByItemType(itemType);
-			request.setAttribute("itemList", itemList);
-			//------パーツのリストを取得
-			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
-			//リクエストスコープにセット
-			request.setAttribute("typeList", typeList);
+				String itemType = request.getParameter("itemType");
+				if(itemType != null) {
+					session.setAttribute("returnItem", itemType);
+				}else {
+					itemType = (String)session.getAttribute("returnItem");
+				}
+				//------パーツのリストを取得
+				ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
+				//リクエストスコープにセット
+				request.setAttribute("typeList", typeList);
 
-			request.getRequestDispatcher(EcHelper.ITEM_EDIT_PAGE).forward(request, response);
+				//アイコン表示用
+				ArrayList<ItemDataBeans>itemList= ItemDAO.getByItemType(itemType);
+				request.setAttribute("itemList", itemList);
+
+				request.getRequestDispatcher(EcHelper.ITEM_EDIT_PAGE).forward(request, response);
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

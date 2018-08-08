@@ -16,7 +16,6 @@
         	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
         	<h4>パーツ追加・削除・編集</h4>
         	<div id="categoty" class="col-md-12">
-				<div class="row">
 					<a href="MasterItemEdit?itemType=all" class="btn btn-raised btn-info">全て</a>　
 					<c:forEach var="type" items="${typeList}" varStatus="status">
 					<a href="MasterItemEdit?itemType=${type.itemType}" class="btn btn-raised btn-info">${type.name}</a>　
@@ -24,7 +23,7 @@
 					<br><br>
 					</c:if>
 					</c:forEach>
-				</div>
+
 			</div>
 
         </div>
@@ -47,7 +46,7 @@
 				   <c:forEach var="itemList" items="${itemList}" varStatus="status">
 				   <div class="form-check">
 				    <tr>
-				    	<td><input type="checkbox" id="${status.index}" name="delete_item_id_list" value="${itemList.id}" /> <label for="${status.index}">${itemList.itemType}</label>
+				    	<td><input type="checkbox" id="${status.index}" name="select_item_id_list" value="${itemList.id}" /> <label for="${status.index}">${itemList.itemType}</label>
 						</td>
 					    <td>${itemList.name}</td>
 					    <td>${itemList.price}</td>
@@ -76,12 +75,16 @@
 				  </tbody>
 				 </table>
 				</div>
-
-			<div class="float-right">
-
-			<input class="btn btn-danger btn-lg" type="submit" name="Delete" value="選択した項目を削除">
-			<input class="btn btn-danger btn-lg" type="submit" name="Edit" value="新商品追加">
-            </div>
+				<div class="row">
+					<div class="col s12">
+						<div class="col s6 center-align">
+							<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="delete">選択した項目を削除</button>
+						</div>
+						<div class="col s6 center-align">
+							<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="add">入力した項目を追加</button>
+            			</div>
+            		</div>
+            	</div>
         </form>
         <jsp:include page="/baselayout/footer.jsp" />
 

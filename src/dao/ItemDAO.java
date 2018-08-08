@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import base.DBManager;
@@ -72,13 +73,15 @@ public class ItemDAO {
 				st = con.prepareStatement("SELECT * " +
 						"FROM m_item " +
 						"JOIN m_item_type " +
-						"ON m_item.item_type = m_item_type.id");
+						"ON m_item.type_num = m_item_type.id "+
+						"ORDER BY type_num,price");
 				}else {
 					st = con.prepareStatement("SELECT * " +
 					"FROM m_item " +
 					"JOIN m_item_type " +
-					"ON m_item.item_type = m_item_type.id "+
-					"WHERE m_item_type.type_category = ? ");
+					"ON m_item.type_num = m_item_type.id "+
+					"WHERE m_item_type.type_category = ? "+
+					"ORDER BY price");
 					st.setString(1, itemType);
 				}
 
@@ -90,6 +93,7 @@ public class ItemDAO {
 				while (rs.next()) {
 					ItemDataBeans item = new ItemDataBeans();
 					item.setId(rs.getInt("id"));
+					item.setTypeNum(rs.getInt("type_num"));
 					item.setName(rs.getString("name"));
 					item.setItemType(rs.getString("type_name"));
 					item.setPrice(rs.getInt("price"));
@@ -110,43 +114,6 @@ public class ItemDAO {
 			}
 		}
 
-		/**
-		 * 該当カスタマイズの標準パーツを抽出
-		 * @param パーツのカテゴリー
-		 * @return <ItemDataBeans>
-		 * @throws SQLException
-		 */
-
-		public static int getByCustomMenu(String type,int id) throws SQLException {
-			Connection con = null;
-			PreparedStatement st = null;
-			try {
-				con = DBManager.getConnection();
-
-				st = con.prepareStatement("SELECT ? FROM m_custom_menu where id = ?");
-				st.setString(1, type);
-				st.setInt(2, id);
-
-				ResultSet rs = st.executeQuery();
-				System.out.println("searching item by inputItems has been completed");
-
-				int itemNum = 0;
-
-				while (rs.next()) {
-						itemNum = rs.getInt(type);;
-						System.out.println("searching item by itemNum has been completed");
-						break;
-					}
-				return itemNum;
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-				throw new SQLException(e);
-			} finally {
-				if (con != null) {
-					con.close();
-				}
-			}
-		}
 
 
 	/**
@@ -302,6 +269,81 @@ public class ItemDAO {
 				con.close();
 			}
 		}
+	}
+
+	/**
+	 * 新商品追加
+	 *
+	 * @param insertItem
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int insertItem(ItemDataBeans idb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		int autoIncKey = -1;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("INSERT INTO m_item(type_num,name,price,file_name,soket,ram_type,link) VALUES(?,?,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			st.setInt(1, idb.getTypeNum());
+			st.setString(2, idb.getName());
+			st.setInt(3, idb.getPrice());
+			st.setString(4, idb.getFileName());
+			st.setString(5, idb.getSoket());
+			st.setString(6, idb.getRamType());
+			st.setString(7, idb.getLink());
+			st.executeUpdate();
+
+			ResultSet rs = st.getGeneratedKeys();
+			if (rs.next()) {
+				autoIncKey = rs.getInt(1);
+			}
+
+			System.out.println("inserting newItem has been completed");
+			return autoIncKey;
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
+	/**
+	 * 新商品追加
+	 *
+	 * @param deleteItem
+	 * @return
+	 * @throws SQLException
+	 */
+	public static boolean deleteItem(int itemId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("DELETE from m_item WHERE id = ?");
+
+			st.setInt(1, itemId);
+			st.executeUpdate();
+			System.out.println("delete item has been completed");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+		return true;
 	}
 
 }

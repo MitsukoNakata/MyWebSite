@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import beans.BuyDataBeans;
 import beans.UserDataBeans;
 import dao.BuyDAO;
+import dao.UserDAO;
 
 /**
  * ユーザー情報画面
@@ -29,8 +30,15 @@ public class UserData extends HttpServlet {
 		// セッション開始
 		HttpSession session = request.getSession();
 		try {
+
+			//不正アクセス対策
+			if(session.getAttribute("userId") == null) {
+				response.sendRedirect("Login");
+				 return;
+			}
 			// ログイン時に取得したユーザーIDをセッションから取得
 			int userId = (int) session.getAttribute("userId");
+
 
 			// 更新確認画面から戻ってきた場合Sessionから取得。それ以外はuserIdでユーザーを取得
 			UserDataBeans udb = session.getAttribute("returnUDB") == null ? UserDAO.getUserDataBeansByUserId(userId) : (UserDataBeans) EcHelper.cutSessionAttribute(session, "returnUDB");

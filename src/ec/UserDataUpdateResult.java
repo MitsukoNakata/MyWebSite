@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.UserDataBeans;
+import dao.UserDAO;
 
 /**
  * ユーザー情報更新完了画面
@@ -27,7 +28,11 @@ public class UserDataUpdateResult extends HttpServlet {
 		// セッション開始
 		HttpSession session = request.getSession();
 		try {
-
+			//不正アクセス対策
+			if(session.getAttribute("userId") == null) {
+				response.sendRedirect("Login");
+				 return;
+			}
 			// 入力フォームから受け取った値をUserDataBeansにセット
 			UserDataBeans udb = new UserDataBeans();
 			udb.setUpdateUserDataBeansInfo(request.getParameter("user_name_update"),

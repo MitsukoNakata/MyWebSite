@@ -9,11 +9,11 @@ import java.io.Serializable;
  */
 public class ItemDataBeans implements Serializable {
 	private int id;
+	private int typeNum;
 	private String itemType;
 	private String name;
 	private int price;
 	private String fileName;
-	private int itemNum;
 	private String link;
 	private String soket;
 	private String ramType;
@@ -49,12 +49,6 @@ public class ItemDataBeans implements Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public int getItemNum() {
-		return itemNum;
-	}
-	public void setItemNum(int itemNum) {
-		this.itemNum = itemNum;
-	}
 	public String getLink() {
 		return link;
 	}
@@ -72,6 +66,12 @@ public class ItemDataBeans implements Serializable {
 	}
 	public void setRamType(String ramType) {
 		this.ramType = ramType;
+	}
+	public int getTypeNum() {
+		return typeNum;
+	}
+	public void setTypeNum(int typeNum) {
+		this.typeNum = typeNum;
 	}
 
 

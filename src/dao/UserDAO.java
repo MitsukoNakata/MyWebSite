@@ -1,4 +1,4 @@
-package ec;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 import base.DBManager;
 import beans.UserDataBeans;
+import ec.EcHelper;
 
 /**
  *

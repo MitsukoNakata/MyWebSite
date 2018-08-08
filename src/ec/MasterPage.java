@@ -25,18 +25,21 @@ public class MasterPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			//不正アクセスの確認
-			int userId = (int) session.getAttribute("userId");
-			if(userId == 1) {
+			//不正アクセス対策
+			if(session.getAttribute("userId") == null || (int)session.getAttribute("userId")!= 1) {
+				response.sendRedirect("Login");
+				 return;
+			}else {
 				//------パーツのリストを取得
 				ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
 				//リクエストスコープにセット
 				request.setAttribute("typeList", typeList);
 				request.getRequestDispatcher(EcHelper.MASTER_PAGE).forward(request, response);
-			}request.getRequestDispatcher("Error").forward(request, response);
+
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("errorMessage", e.toString());
+			session.setAttribute("errorMessage", e.toString()+"不正なアクセス");
 			response.sendRedirect("Error");
 		}
 	}
