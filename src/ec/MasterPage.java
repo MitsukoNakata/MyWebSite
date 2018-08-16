@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.CustomDataBeans;
 import beans.ItemDataBeans;
+import dao.CustomDAO;
 import dao.ItemDAO;
 
 /**
@@ -32,8 +34,11 @@ public class MasterPage extends HttpServlet {
 			}else {
 				//------パーツのリストを取得
 				ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
+				ArrayList<CustomDataBeans>customList= CustomDAO.getCustomTypeList();
+
 				//リクエストスコープにセット
 				request.setAttribute("typeList", typeList);
+				request.setAttribute("customList", customList);
 				request.getRequestDispatcher(EcHelper.MASTER_PAGE).forward(request, response);
 
 			}

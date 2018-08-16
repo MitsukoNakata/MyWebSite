@@ -24,7 +24,7 @@
 		</div>
 		<div class="col-md-6">
 		<h5>【2018年最新モデルABX】</h5>
-		
+
 		<br>
 		<p>PC Robinのオールインワンパソコンが新しく生まれ変わりました。
     	奥行きわずか19cmのコンパクト筐体にインテリアにもなる落ち着きのあるデザイン。
@@ -34,8 +34,8 @@
 		</div><!--/.row-->
 		<div class="row">
 			<div class="col-md-3"><h5>基本構成</h5></div>
-			<div class="col-md-7"><h5> ${customitem.customName}</h5></div>
-			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}"/>円〜</div>
+			<div class="col-md-7"><h5> ${customItem.customName}</h5></div>
+			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customItem.price}"/>円〜</div>
 			<br><br><br>
 		</div><!--/基本構成タイトル.row-->
 
@@ -59,7 +59,7 @@
 				    <tr>
 				      <td scope="row">
  					 		<c:choose>
- 					 			<c:when test="${item.id == customitem[itemType]}">
+ 					 			<c:when test="${item.id == customItem[itemType]}">
 	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}" checked>
 	 					 			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
 	 					 			</td>
@@ -72,7 +72,7 @@
 
 	 					 			</td>
 							      <td><label class="control-label" for="${item.id}">
-							      <fmt:formatNumber value="${item.price - customitem[itemObj].price}" type="CURRENCY" pattern="+#,###;-#,###"/>円</label>
+							      <fmt:formatNumber value="${item.price - customItem[itemObj].price}" type="CURRENCY" pattern="+#,###;-#,###"/>円</label>
 							      </td> <%-- 標準構成パーツとの差額 --%>
 				    </tr>
 				    	</c:otherwise>
@@ -87,7 +87,7 @@
 		</c:forEach>
 
 			<div class="float-right">
-			<input type="hidden" name="customName" value="${customitem.customName}">
+			<input type="hidden" name="customName" value="${customItem.customName}">
 			<button class="btn btn-danger btn-lg" type="submit" >カートへ
             <img src="https://png.icons8.com/material/50/000000/shopping-cart.png" width="auto" height="25"></button></div>
         </form>

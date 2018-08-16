@@ -43,7 +43,7 @@ public class Item extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("item_id"));
 			CustomDataBeans customItemList= CustomDAO.getCustomItemList(id);
 			//リクエストスコープにセット
-			request.setAttribute("customitem", customItemList);
+			request.setAttribute("customItem", customItemList);
 
 			//-------パーツリストからパーツ名を取得しパーツ別の商品リストを取得し
 			//各パーツでリクエストスコープに格納を繰り返す。

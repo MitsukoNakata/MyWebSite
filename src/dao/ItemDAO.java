@@ -30,7 +30,7 @@ public class ItemDAO {
 			try {
 				con = DBManager.getConnection();
 
-				st = con.prepareStatement("SELECT * FROM m_item_type");
+				st = con.prepareStatement("SELECT * FROM m_item_type ORDER BY id");
 
 				ResultSet rs = st.executeQuery();
 
@@ -314,6 +314,40 @@ public class ItemDAO {
 		}
 	}
 
+	/**
+	 * 商品情報更新
+	 *
+	 * @param updateItem
+	 * @return
+	 * @throws SQLException
+	 */
+	public static void updateItem(ItemDataBeans idb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("Update m_item SET name= ?, price= ?, file_name= ?, soket= ?, ram_type= ?, link= ? WHERE id = ? ");
+			st.setString(1, idb.getName());
+			st.setInt(2, idb.getPrice());
+			st.setString(3, idb.getFileName());
+			st.setString(4, idb.getSoket());
+			st.setString(5, idb.getRamType());
+			st.setString(6, idb.getLink());
+			st.setInt(7, idb.getId());
+			st.executeUpdate();
+			System.out.println("update has been completed");
+
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
 
 	/**
 	 * 新商品追加

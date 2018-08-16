@@ -20,22 +20,26 @@
 			<div class="col s12">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-							<c:if test="${validationMessage != null}">
-								<p class="red-text center-align">${validationMessage}</p>
-							</c:if>
 							<br><h5>パーツの追加・編集・削除</h5><br>
-
 							<div class="row">
 									<a href="MasterItemEdit?itemType=all" class="btn btn-raised btn-info">全て</a>　
 									<c:forEach var="type" items="${typeList}" varStatus="status">
 									<a href="MasterItemEdit?itemType=${type.itemType}" class="btn btn-raised btn-info">${type.name}</a>　
-									<c:if test="${status.count == 3}">
-									<br><br>
-									</c:if>
+										<c:if test="${status.count == 3}">
+										<br><br>
+										</c:if>
 									</c:forEach>
-
 							</div>
-
+							<br><h5>カスタムメニューの追加・編集・削除</h5><br>
+							<div class="row">
+									<a href="MasterCustomEdit?customType=all" class="btn btn-raised btn-info">全て</a>　
+									<c:forEach var="custom" items="${customList}" varStatus="status">
+									<a href="MasterCustomEdit?customType=${custom.customType}" class="btn btn-raised btn-info">${custom.customType}</a>　
+										<c:if test="${status.count == 3}">
+										<br><br>
+										</c:if>
+									</c:forEach>
+							</div>
 							</div>
 					</div>
 				</div>

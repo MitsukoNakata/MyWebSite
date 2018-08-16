@@ -7,91 +7,180 @@
 <html lang="jpn">
   <head>
 <jsp:include page="/baselayout/head.html" />
+<style>
+  	#actionMessage {
+   	 font-size: 80%;
+	  }
+.form-control-text {
+  padding-top: $input-padding-y;
+  padding-bottom: $input-padding-y;
+  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  line-height: $input-line-height;
+  color: $input-plaintext-color;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: $input-border-width 0;
+
+  &.form-control-sm,
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+</style>
     <title>商品カスタマイズ</title>
   </head>
   <body class="bg-light">
 	<jsp:include page="/baselayout/header.jsp" />
-	<div class ="container">
 		<div class="py-5 text-center">
+
         	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
-        	<h3>商品カスタマイズ</h3>
+        	<h4>カスタムメニューの追加・削除・編集</h4>
+        	<div id="categoty" class="col-md-12">
+								<a href="MasterCustomEdit?customType=all" class="btn btn-raised btn-info">全て</a>　
+								<c:forEach var="custom" items="${customList}" varStatus="status">
+								<a href="MasterCustomEdit?customType=${custom.customType}" class="btn btn-raised btn-info">${custom.customType}</a>　
+									<c:if test="${status.count == 3}">
+									<br><br>
+									</c:if>
+								</c:forEach>
+
+				<c:if test="${actionMessage != null}">
+					<p class="text-danger"><br>${actionMessage}</p>
+				</c:if>
+			</div>
 
         </div>
-		<div class="row">
-		<div id="img" class="col-md-6">
-		<img src="img/custom/main_pc_201801.png" width="300" height="auto">
-		<br><br>
-		</div>
-		<div class="col-md-6">
-		<h5>【2018年最新モデルABX】</h5>
-		<br>
-		<p>PC Robinのオールインワンパソコンが新しく生まれ変わりました。
-    	奥行きわずか19cmのコンパクト筐体にインテリアにもなる落ち着きのあるデザイン。
-    	第8世代インテル® Core™ i7プロセッサーを搭載可能、優れたパフォーマンスを発揮します。
-    	今ならメモリー8GBモデルが大変オトクです。</p>
-		</div>
-		</div><!--/.row-->
-		<div class="row">
-			<div class="col-md-3"><h5>基本構成</h5></div>
-			<div class="col-md-7"><h5> ${customitem.customName}</h5></div>
-			<div class="col-md-2">標準構成価格<br><fmt:formatNumber value="${customitem.price}"/>円〜</div>
-			<br><br><br>
-		</div><!--/基本構成タイトル.row-->
-
-		<form action="Cart" method="POST">
-		<c:forEach var="type" items="${typeList}">
-		<div class="row">
-			<div id="img" class="col-md-2"><img src="img/custom/${type.fileName}" height="84" width="auto"></div>
-			<div id="categoty" class="col-md-10">
-				<table class="table table-hover">
+        <form action="MasterCustomEditResult" method="POST">
+		<div class="container">
+			<div id="accordion">
+			<c:forEach var="customMenu" items="${customMenuList}"> <!-- customMenu →カテゴリー別のカスタマイズの一覧-->
+			  <div class="card">
+			    <div class="card-header" id="headingOne">
+			      <h6 class="mb-0">
+			        【カテゴリー】：${customMenu.customType}　　　【カスタム名】：${customMenu.customName}　　　【構成価格】:<fmt:formatNumber>${customMenu.price}</fmt:formatNumber>円　　<a data-toggle="collapse" href="#${customMenu.id}">詳細</a>
+			      </h6>
+			    </div>
+			    <div id="${customMenu.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+			      <div class="card-body">
+			<div id="categoty" class="col-md-12">
+				<table class="table table-bordered">
 				  <thead>
+				  <tr>
+				  	<th>カスタム詳細</th>
+				 	<th><select class="form-control" data-style="text-right" name="type_category_id">
+				    		<c:forEach var="custom" items="${customList}">　<!-- custom →カスタマイズカテゴリーリスト -->
+				    			<c:if test ="${customMenu.customType == custom.customType}">
+				    				<option value="${custom.customType}" class="text-right" selected>カスタムカテゴリ：${custom.customType}</option>
+				    			</c:if>
+				    			<c:if test ="${customMenu.customType != custom.customType}">
+				    				<option value="${custom.customType}" class="text-right">カスタムカテゴリ：${custom.customType}</option>
+				    			</c:if>
+				    		</c:forEach>
+					</select>
+					</th>
+				</tr>
+				</thead>
 				    <tr>
-				      <th style="width: 85%"><p>${type.name} </p></th>
-				      <th style="width: 100%"></th>
+				      <th>パーツ名</th>
+				      <th>商品名</th>
 				    </tr>
-				  </thead>
+
 				  <tbody>
-				  <c:set var="itemType" value="${type.itemType}" />
-				  <c:set var="itemObj" value="${type.itemType}Item" />
-				 <c:forEach var="item" items="${requestScope[itemType]}">
-				 <div class="form-check">
+				  	<c:forEach var="type" items="${typeList}" >　　<!-- type 各パーツのリスト　base,cpuなど -->
 				    <tr>
-				      <td scope="row">
- 					 		<c:choose>
- 					 			<c:when test="${item.id == customitem[itemType]}">
-	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}" checked>
-	 					 			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
-	 					 			</td>
-									 <td><label for="${item.id}">【標準】</label></td>
+				    <td>
+				    	${type.name}
+						<%-- 商品追加時　アイテムリストを出す、ページ遷移時選択されてるアイテムを選択された状態でリスト化するよう条件分岐 --%>
+					</td>
+				    <td>
+				    	<select class="form-control" data-style="text-right" name="type_category_id">
+				    		<c:set var="itemType" value="${type.itemType}" />
+				    		<c:forEach var="item" items="${requestScope[itemType]}" >
+				    			<c:if test="${customMenu[itemType] == item.id }">
+				    				<option value="${item.id}" class="text-right" selected>${item.price}円　${item.name}</option>
+				    			</c:if>
+				    			<c:if test="${customMenu[itemType] != item.id }">
+				    				<option value="${item.id}" class="text-right">${item.price}円　${item.name}</option>
+				    			</c:if>
+				    		</c:forEach>
+						</select>
+				    </td>
 				    </tr>
-				      			</c:when>
-				      		<c:otherwise>
-				      			<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}">
-					      			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
-
-	 					 			</td>
-							      <td><label class="control-label" for="${item.id}">
-							      <fmt:formatNumber value="${item.price - customitem[itemObj].price}"/>円</label>
-							      </td> <%-- 標準構成パーツとの差額 --%>
-				    </tr>
-				    	</c:otherwise>
-					   	</c:choose>
-				</div>
-				    </c:forEach>
-				  	</tbody>
+				  </c:forEach>
+				  </tbody>
 				 </table>
-				</div>
-			</div><!--/.row-->
+				 </div>
+			      </div>
+			    </div>
+			  </div>
+			</c:forEach>
+			</div>
 
-		</c:forEach>
+			<div id="categoty" class="col-md-12">
+				<table class="table table-bordered">
+				  <thead>
+				  <tr>
+				  	<th>新商品追加</th>
+				 	<th><select class="form-control" data-style="text-right" name="type_category_id">
+				    		<c:forEach var="custom" items="${customList}">
+				    			<option value="${custom.customType}" class="text-right">カスタムカテゴリ：${custom.customType}</option>
+				    		</c:forEach>
+					</select>
+					</th>
+				</tr>
+				</thead>
 
-			<div class="float-right">
-			<input type="hidden" name="customName" value="${customitem.customName}">
-			<button class="btn btn-danger btn-lg" type="submit" >カートへ
-            <img src="https://png.icons8.com/material/50/000000/shopping-cart.png" width="auto" height="25"></button></div>
+				    <tr>
+				      <th>パーツ名</th>
+				      <th>商品名</th>
+				    </tr>
+
+				  <tbody>
+				    <tr>
+				    <td>
+				    	<select class="form-control" data-style="text-right" name="type_category_id">
+						<%-- 商品追加時　アイテムリストを出す、ページ遷移時選択されてるアイテムを選択された状態でリスト化するよう条件分岐 --%>
+						<c:forEach var="typeList" items="${typeList}" >
+							<c:if test ="${returnItem == typeList.itemType}">
+								<option value="${typeList.id}" class="text-right" selected> ${typeList.name}</option>
+							</c:if>
+							<c:if test ="${returnItem != typeList.itemType}">
+								<option value="${typeList.id}" class="text-right"> ${typeList.name}</option>
+							</c:if>
+
+						</c:forEach>
+						</select>
+					</td>
+				    <td>
+				    	<select class="form-control" data-style="text-right" name="type_category_id">
+				    		<c:forEach var="cpuList" items="${cpu}" >
+				    			<option value="${cpuList.id}" class="text-right">${cpuList.price}円　${cpuList.name}</option>
+				    		</c:forEach>
+						</select>
+				    </td>
+				    </tr>
+				  </tbody>
+				 </table>
+				 </div>
+
+				<div class="row">
+					<div class="col s12">
+						<div class="col s4 center-align">
+							<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="delete">選択した項目を削除</button>
+						</div>
+						<div class="col s4 center-align">
+							<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="update">選択した項目を更新</button>
+						</div>
+						<div class="col s4 center-align">
+							<button class="btn  waves-effect waves-light  col s6 offset-s3" type="submit" name="confirmButton" value="add">入力した項目を追加</button>
+            			</div>
+            		</div>
+            	</div>
+            </div>
         </form>
+
         <jsp:include page="/baselayout/footer.jsp" />
-	</div><!--/.container-->
+
 
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
