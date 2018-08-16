@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import base.DBManager;
+import beans.CustomDataBeans;
 import beans.ItemDataBeans;
 
 /**
@@ -349,35 +350,80 @@ public class ItemDAO {
 		}
 	}
 
-	/**
-	 * 新商品追加
-	 *
-	 * @param deleteItem
-	 * @return
-	 * @throws SQLException
-	 */
-	public static boolean deleteItem(int itemId) throws SQLException {
-		Connection con = null;
-		PreparedStatement st = null;
+		/**
+		 * 商品削除
+		 *
+		 * @param deleteItem
+		 * @return
+		 * @throws SQLException
+		 */
+		public static boolean deleteItem(int itemId) throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
 
-		try {
-			con = DBManager.getConnection();
-			st = con.prepareStatement("DELETE from m_item WHERE id = ?");
+			try {
+				con = DBManager.getConnection();
+				st = con.prepareStatement("DELETE from m_item WHERE id = ?");
 
-			st.setInt(1, itemId);
-			st.executeUpdate();
-			System.out.println("delete item has been completed");
+				st.setInt(1, itemId);
+				st.executeUpdate();
+				System.out.println("delete item has been completed");
 
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new SQLException(e);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
 
-		} finally {
-			if (con != null) {
-				con.close();
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+			return true;
+		}
+
+		/**
+		 * 選択構成の合計金額取得
+		 *
+		 * @param deleteItem
+		 * @return
+		 * @throws SQLException
+		 */
+		public static int getTotalPrice(CustomDataBeans idb) throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+
+			try {
+				con = DBManager.getConnection();
+
+				//選択されたパーツたちの合計金額を算出
+				st = con.prepareStatement("SELECT SUM(price) FROM m_item WHERE id= ? or id= ? or id= ? or id= ? or"
+						+ " id= ? or id= ? or id= ? or id= ? ");
+
+				st.setInt(1, idb.getBase());
+				st.setInt(2, idb.getCpu());
+				st.setInt(3, idb.getRam());
+				st.setInt(4, idb.getGraphics());
+				st.setInt(5, idb.getStorage());
+				st.setInt(6, idb.getOs());
+				st.setInt(7, idb.getOffice());
+				st.setInt(8, idb.getAssemble());
+				ResultSet rs = st.executeQuery();
+
+				int totalPrice = 0;
+
+				if (rs.next()) {
+				totalPrice = rs.getInt("SUM(price)");
+				}
+				System.out.println("getTotalPrice has been completed");
+				return totalPrice;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
 			}
 		}
-		return true;
 	}
-
-}

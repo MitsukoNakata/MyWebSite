@@ -14,6 +14,7 @@ import dao.ItemDAO;
 public class CustomDataBeans implements Serializable {
 	private int id;
 	private String customName;
+	private int customTypeNum;
 	private String customType;
 	private int price;
 	private int base;
@@ -127,6 +128,15 @@ public class CustomDataBeans implements Serializable {
 	public void setCustomName(String customName) {
 		this.customName = customName;
 	}
+
+	public int getCustomTypeNum() {
+		return customTypeNum;
+	}
+
+	public void setCustomTypeNum(int customTypeNum) {
+		this.customTypeNum = customTypeNum;
+	}
+
 	public String getCustomType() {
 		return customType;
 	}

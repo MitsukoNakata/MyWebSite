@@ -55,7 +55,7 @@
 				  <thead>
 				    <tr>
 				      <th>カテゴリ</th>
-				      <th>パーツ名</th>
+				      <th colspan="2">パーツ名</th>
 				      <th>金額</th>
 				      <th>画像</th>
 				      <th>ソケット</th>
@@ -69,7 +69,7 @@
 				    <tr>
 				    	<td><input type="checkbox" id="${status.index}" name="select_item_id_list" value="${itemList.id}" /> <label for="${status.index}">${itemList.itemType}</label>
 						</td>
-					    <td><input type="text" class="form-control input-normal" name="${itemList.id}" value="${itemList.name}"></td>
+					    <td colspan="2"><input type="text" class="form-control input-normal" name="${itemList.id}" value="${itemList.name}"></td>
 					    <td><input type="text" class="form-control input-normal" name="${itemList.id}" value="${itemList.price}"></td>
 					    <td><input type="text" class="form-control input-normal" name="${itemList.id}" value="${itemList.fileName}"></td>
 					    <td><input type="text" class="form-control input-normal" name="${itemList.id}" value="${itemList.soket}"></td>
@@ -78,7 +78,7 @@
 				    </tr>
 				    </div>
 				    </c:forEach>
-				    <tr><th colspan="2">新商品追加</tr>
+				    <tr><th>新商品追加</tr>
 				    <tr>
 				    <td><select class="form-control" data-style="text-right" name="type_category_id">
 						<%-- 商品追加時　アイテムリストを出す、ページ遷移時選択されてるアイテムを選択された状態でリスト化するよう条件分岐 --%>
@@ -93,7 +93,7 @@
 						</c:forEach>
 						</select>
 					</td>
-				    <td><input type="text" class="form-control input-normal" placeholder="パーツ名を入力" name="name_of_part"></td>
+				    <td colspan="2"><input type="text" class="form-control input-normal" placeholder="パーツ名を入力" name="name_of_part"></td>
 				    <td><input type="text" class="form-control input-normal" placeholder="半角数字のみ" name="price"></td>
 				    <td><input type="text" class="form-control input-normal" placeholder="画像を選択" name="picture"></td>
 				    <td><input type="text" class="form-control input-normal" placeholder="CPUのみ" name="soket"></td>
