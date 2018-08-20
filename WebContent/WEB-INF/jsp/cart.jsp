@@ -15,28 +15,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="Materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
 	<link href="Materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-<style type="text/css"><!--
-/*ここに調整CSS記述*/
- #validationMessage {
+<style type="text/css">
+ #cartActionMessage {
    	 font-size: 80%;
 	  }
-
-.form-control-text {
-  padding-top: $input-padding-y;
-  padding-bottom: $input-padding-y;
-  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
-  line-height: $input-line-height;
-  color: $input-plaintext-color;
-  background-color: transparent;
-  border: solid transparent;
-  border-width: $input-border-width 0;
-
-  &.form-control-sm,
-  &.form-control-lg {
-    padding-right: 0;
-    padding-left: 0;
-  }
---></style>
+</style>
 
     <title>カート</title>
 
@@ -52,8 +35,18 @@
 
         	<img class="d-block mx-auto mb-4" src="img/dummy.png" alt="" width="72" height="auto">
         	<h4>カートの中</h4>
+
+        	<c:if test="${cartActionMessage != null}">
+					<p class="text-danger"><br>${cartActionMessage}</p>
+			</c:if>
         </div>
-	<form action="Buy" method="POST">
+	<form method="POST">
+		<div class="float-right">
+			<button class="btn waves-effect waves-light col s6 offset-s3 " type="submit" onclick="submitAction('/PCrobin/ItemDelete')">
+				削除<i class="material-icons right">delete</i>
+			</button>
+		</div>
+	 <br><br><br>
         <table class="table">
           <thead>
             <tr>
@@ -64,21 +57,24 @@
             </tr>
           </thead>
           <tbody>
+          <c:set var="cartTotalPrice" value="${0}" />
+          <c:forEach var="cart" items="${cart}" varStatus="status">
             <tr>
               <td> <!--カスタマイズした商品詳細-->
-              	<h5>${customName}</h5>
-				<c:set var="customPrice" value="${0}" />
+              	<input type="checkbox" id="${status.index}" name="delete_item_id_list" value="${cart.id}" />
+              	<label for="${status.index}">${cart.customName}</label>
+
 				<c:forEach var="type" items="${typeList}">
-				  <c:set var="itemType" value="${type.itemType}" /> <!-- パーツ名取得用 -->
-				   <c:set var="customPrice" value="${customPrice + requestScope[itemType].price}" /><!-- カスマイズ金額取得用 -->
-				  <p><input type="hidden" name="${itemType}" value="${requestScope[itemType].id}">
-				  ・${requestScope[itemType].name}</p>
+				  <c:set var="itemType" value="${type.itemType}Name" /> <!-- パーツ名取得用 -->
+				  <p>・${cart[itemType]}</p>
 				</c:forEach>
               </td>
-				<td><fmt:formatNumber>${customPrice}</fmt:formatNumber></td>
+              	<c:set var="cartTotalPrice" value="${cartTotalPrice + cart.totalPrice}" /><!-- カスマイズ金額取得用 -->
+				<td><fmt:formatNumber>${cart.totalPrice}</fmt:formatNumber></td>
 				<td>1</td>
-				<td><fmt:formatNumber>${customPrice}</fmt:formatNumber></td>
+				<td><fmt:formatNumber>${cart.totalPrice}</fmt:formatNumber></td>
             </tr>
+            </c:forEach>
              <tr>
 
               <td>
@@ -86,7 +82,7 @@
 
               <td></td>
               <th>合計金額</th>
-              <td><fmt:formatNumber>${customPrice}</fmt:formatNumber>円</td>
+              <td><fmt:formatNumber>${cartTotalPrice}</fmt:formatNumber>円</td>
             </tr>
             <tr>
               <td></td>
@@ -102,8 +98,8 @@
         </table>
 
       <div class="float-right">
-     <input type="hidden" name="totalPrice" value="${customPrice}">
-			<button type="submit" name="action" class="btn btn-danger btn-lg">
+     <input type="hidden" name="cart_total_price" value="${cartTotalPrice}">
+			<button type="submit" name="action" class="btn btn-danger btn-lg" onclick="submitAction('/PCrobin/Buy')">
         購入・注文へ</button></div>
         </form>
         <jsp:include page="/baselayout/footer.jsp" />
@@ -119,5 +115,12 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
       <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
       <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+      <script>
+      function submitAction(url) {
+    	  $('form').attr('action', url);
+    	  $('form').submit();
+    	}
+      </script>
+
     </body>
   </html>

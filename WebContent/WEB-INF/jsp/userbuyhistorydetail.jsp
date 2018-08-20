@@ -61,22 +61,23 @@
 								</tr>
 							</thead>
 							<tbody>
-
+								<c:forEach var="buyDetail" items="${buyDetailList}">
 									<tr>
 										<td>
+											<p>【${buyDetail.customName}】</p>
 											<c:forEach var="type" items="${typeList}">
-											<c:set var="itemType" value="${type.itemType}Name" />
-												<p>・${resultBDB[itemType]}</p>
+												<c:set var="itemType" value="${type.itemType}Name" />
+												<p>・${buyDetail[itemType]}</p>
 												</c:forEach>
 										</td>
 										<td class="center">
-										<fmt:formatNumber value="${resultBDB.totalPrice - resultBDB.deliveryMethodPrice}"/>円</td>
+										<fmt:formatNumber value="${buyDetail.totalPrice}"/>円</td>
 									</tr>
-
-								<tr>
-									<td class="center">${resultBDB.deliveryMethodName}</td>
-									<td class="center"><fmt:formatNumber value="${resultBDB.deliveryMethodPrice}"/>円</td>
-								</tr>
+								</c:forEach>
+									<tr>
+									    <td class="center">${resultBDB.deliveryMethodName}</td>
+										<td class="center"><fmt:formatNumber value="${resultBDB.deliveryMethodPrice}"/>円</td>
+									</tr>
 							</tbody>
 						</table>
 					</div>

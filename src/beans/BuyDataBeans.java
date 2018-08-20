@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -10,21 +11,12 @@ import java.util.Date;
  * @author m-takeuchi
  *
  */
-public class BuyDataBeans  implements Serializable {
-	private int id;
+public class BuyDataBeans  extends CustomDataBeans implements Serializable {
 	private int userId;
+	private int buyId;
 	private int totalPrice;
 	private int deliveryMethodId;
 	private Date buyDate;
-	private String customName;
-	private int base;
-	private int cpu;
-	private int ram;
-	private int graphics;
-	private int storage;
-	private int os;
-	private int office;
-	private int assemble;
 	private String baseName;
 	private String cpuName;
 	private String ramName;
@@ -36,18 +28,18 @@ public class BuyDataBeans  implements Serializable {
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
 
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getUserId() {
 		return userId;
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getBuyId() {
+		return buyId;
+	}
+	public void setBuyId(int buyId) {
+		this.buyId = buyId;
 	}
 	public int getTotalPrice() {
 		return totalPrice;
@@ -55,55 +47,7 @@ public class BuyDataBeans  implements Serializable {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public String getCustomName() {
-		return customName;
-	}
-	public void setCustomName(String customName) {
-		this.customName = customName;
-	}
 
-	public int getBase() {
-		return base;
-	}
-	public void setBase(int base) {
-		this.base = base;
-	}
-	public int getCpu() {
-		return cpu;
-	}
-	public void setCpu(int cpu) {
-		this.cpu = cpu;
-	}
-	public int getRam() {
-		return ram;
-	}
-	public void setRam(int ram) {
-		this.ram = ram;
-	}
-	public int getGraphics() {
-		return graphics;
-	}
-	public void setGraphics(int graphics) {
-		this.graphics = graphics;
-	}
-	public int getStorage() {
-		return storage;
-	}
-	public void setStorage(int storage) {
-		this.storage = storage;
-	}
-	public int getOs() {
-		return os;
-	}
-	public void setOs(int os) {
-		this.os = os;
-	}
-	public int getOffice() {
-		return office;
-	}
-	public void setOffice(int office) {
-		this.office = office;
-	}
 	public int getDeliveryMethodId() {
 		return deliveryMethodId;
 	}
@@ -133,12 +77,7 @@ public class BuyDataBeans  implements Serializable {
 	public void setDeliveryMethodPrice(int deliveryMethodPrice) {
 		this.deliveryMethodPrice = deliveryMethodPrice;
 	}
-	public int getAssemble() {
-		return assemble;
-	}
-	public void setAssemble(int assemble) {
-		this.assemble = assemble;
-	}
+
 	public String getBaseName() {
 		return baseName;
 	}
@@ -187,7 +126,25 @@ public class BuyDataBeans  implements Serializable {
 	public void setAssembleName(String assembleName) {
 		this.assembleName = assembleName;
 	}
+	public static BuyDataBeans settingInfo (ArrayList<String> list) {
+		BuyDataBeans idb =  new BuyDataBeans();
+		idb.setBase(Integer.parseInt(list.get(0)));
+		idb.setBaseName(list.get(1));
+		idb.setCpu(Integer.parseInt(list.get(2)));
+		idb.setCpuName(list.get(3));
+		idb.setRam(Integer.parseInt(list.get(4)));
+		idb.setRamName(list.get(5));
+		idb.setGraphics(Integer.parseInt(list.get(6)));
+		idb.setGraphicsName(list.get(7));
+		idb.setStorage(Integer.parseInt(list.get(8)));
+		idb.setStorageName(list.get(9));
+		idb.setOs(Integer.parseInt(list.get(10)));
+		idb.setOsName(list.get(11));
+		idb.setOffice(Integer.parseInt(list.get(12)));
+		idb.setOfficeName(list.get(13));
+		idb.setAssemble(Integer.parseInt(list.get(14)));
+		idb.setAssembleName(list.get(15));
 
-
-
+		return idb;
+	}
 }

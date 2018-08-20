@@ -2,7 +2,6 @@ package ec;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
+import beans.CustomDataBeans;
 import beans.DeliveryMethodDataBeans;
 import beans.ItemDataBeans;
 import dao.DeliveryMethodDAO;
@@ -31,31 +32,46 @@ public class ItemAdd extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
-			String customName = request.getParameter("customName");
-			session.setAttribute("customName", customName);
-
 			// 配送方法をDBから取得
 			ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();
 			request.setAttribute("dmdbList", dMDBList);
 
-			//カスタマイズ画面で選択されたパーツのIDをLIST化する
-			List<Integer> selectList = new ArrayList<>();
-			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();   //パーツ名のリスト取得用　順番ミス防止
+			String customName = request.getParameter("customName");
+			session.setAttribute("customName", customName);
+			int i = 0;
+			int getId = 0;
+
+			//カートを取得
+			ArrayList<BuyDataBeans> cart = (ArrayList<BuyDataBeans>) session.getAttribute("cart");
+			//セッションにカートがない場合カートを作成
+			if (cart == null) {
+				cart = new ArrayList<BuyDataBeans>();
+			}else if(cart.size() != 0) {
+				i = (cart.size()) -1 ;
+				getId = cart.get(i).getId();
+			}
+			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();
+
+			ArrayList<String> list = new ArrayList<String>();
+			for (int y = 0; y < typeList.size(); y++) {
+			String type = typeList.get(y).getItemType();
+			String value = request.getParameter(type);
+			String []values = value.split(",",0);
+			list.add(values[0]);
+			list.add(values[1]);
+			}
+
+			BuyDataBeans idb = BuyDataBeans.settingInfo(list);
+			idb.setCustomName(customName);
+			idb.setId(getId + 1);
+			idb.setTotalPrice(ItemDAO.getTotalPrice((CustomDataBeans)idb));
+			//カートに商品を追加。
+			cart.add(idb);
+
+			session.setAttribute("cart", cart);
 			request.setAttribute("typeList", typeList);
 
-			for (int i = 0; i < typeList.size(); i++) {           //パーツの順番通り選択したパーツIDをLISTに入れる
-			String type = typeList.get(i).getItemType();
-			selectList.add(Integer.parseInt(request.getParameter(type)));
-			//session.setAttribute(type,selectList.get(i) );
-			}
-
-			for (int i = 0; i < selectList.size(); i++) {     //選択されたパーツの各情報をパーツ名でそれぞれ格納　　　
-			String type = typeList.get(i).getItemType();
-			System.out.println(selectList.get(i));
-			ItemDataBeans item = ItemDAO.getItemByItemID(selectList.get(i));
-			request.setAttribute(type, item);
-			}
-
+			request.setAttribute("cartActionMessage", "商品を追加しました");
 			request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 
 		} catch (Exception e) {

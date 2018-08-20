@@ -39,7 +39,7 @@
 			<br><br><br>
 		</div><!--/基本構成タイトル.row-->
 
-		<form action="Cart" method="POST">
+		<form action="ItemAdd" method="POST">
 		<c:forEach var="type" items="${typeList}">
 		<div class="row">
 			<div id="img" class="col-md-2"><img src="img/custom/${type.fileName}" height="84" width="auto"></div>
@@ -60,14 +60,14 @@
 				      <td scope="row">
  					 		<c:choose>
  					 			<c:when test="${item.id == customItem[itemType]}">
-	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}" checked>
+	 					 		<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id},${item.name}" checked>
 	 					 			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
 	 					 			</td>
 									 <td><label for="${item.id}">【標準】</label></td>
 				    </tr>
 				      			</c:when>
 				      		<c:otherwise>
-				      			<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id}">
+				      			<input class="form-check-input" type="radio" indexed="true" name="${type.itemType}" id="${item.id}" value="${item.id},${item.name}">
 					      			<label class="control-label" for="${item.id}">${item.name}<a href="${item.link}" target="_blank">【詳細】</a></label>
 
 	 					 			</td>
@@ -88,7 +88,7 @@
 
 			<div class="float-right">
 			<input type="hidden" name="customName" value="${customItem.customName}">
-			<button class="btn btn-danger btn-lg" type="submit" >カートへ
+			<button class="btn btn-danger btn-lg" type="submit" >カートに追加
             <img src="https://png.icons8.com/material/50/000000/shopping-cart.png" width="auto" height="25"></button></div>
         </form>
         <jsp:include page="/baselayout/footer.jsp" />

@@ -62,19 +62,9 @@ public class MasterCustomEditResult extends HttpServlet {
 				if (selectItemIdList !=null ) {
 					for(String updateItemId : selectItemIdList) {
 						String[] updateItem = request.getParameterValues(updateItemId);
-						CustomDataBeans idb = new CustomDataBeans();
+						CustomDataBeans idb = CustomDataBeans.settingInfo(updateItem);
 
 						idb.setId(Integer.parseInt(updateItemId));
-						idb.setCustomTypeNum(Integer.parseInt(updateItem[0]));
-						idb.setCustomName(updateItem[1]);
-						idb.setBase(Integer.parseInt(updateItem[2]));
-						idb.setCpu(Integer.parseInt(updateItem[3]));
-						idb.setRam(Integer.parseInt(updateItem[4]));
-						idb.setGraphics(Integer.parseInt(updateItem[5]));
-						idb.setStorage(Integer.parseInt(updateItem[6]));
-						idb.setOs(Integer.parseInt(updateItem[7]));
-						idb.setOffice(Integer.parseInt(updateItem[8]));
-						idb.setAssemble(Integer.parseInt(updateItem[9]));
 
 						CustomDAO.updateItem(idb);
 					}
@@ -98,20 +88,10 @@ public class MasterCustomEditResult extends HttpServlet {
 
 				if(isEmpty == false) {
 
-					CustomDataBeans idb = new CustomDataBeans();
-
-					idb.setCustomTypeNum(Integer.parseInt(customItemList[0]));
-					idb.setCustomName(customItemList[1]);
-					idb.setBase(Integer.parseInt(customItemList[2]));
-					idb.setCpu(Integer.parseInt(customItemList[3]));
-					idb.setRam(Integer.parseInt(customItemList[4]));
-					idb.setGraphics(Integer.parseInt(customItemList[5]));
-					idb.setStorage(Integer.parseInt(customItemList[6]));
-					idb.setOs(Integer.parseInt(customItemList[7]));
-					idb.setOffice(Integer.parseInt(customItemList[8]));
-					idb.setAssemble(Integer.parseInt(customItemList[9]));
+					CustomDataBeans idb = CustomDataBeans.settingInfo(customItemList);
 
 					CustomDAO.insertItem(idb);
+
 					actionMessage = "入力された商品を追加しました";
 				}else {
 					actionMessage = "追加する項目が不足してます";

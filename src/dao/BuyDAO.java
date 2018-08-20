@@ -1,3 +1,4 @@
+
 package dao;
 
 import java.sql.Connection;
@@ -22,30 +23,22 @@ public class BuyDAO {
 	/**
 	 * 購入情報登録処理
 	 * @param bdb 購入情報
-	 * @throws SQLException 呼び出し元にスローさせるため
+	 * @throws SQLExcseption 呼び出し元にスローさせるため
 	 */
 	public static int insertBuy(BuyDataBeans bdb) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		int autoIncKey = -1;
+
 		try {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
-					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date,base,cpu,ram,graphics,storage,os,office,assemble) "
-					+"VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
-					,Statement.RETURN_GENERATED_KEYS);
+					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date) VALUES(?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, bdb.getUserId());
 			st.setInt(2, bdb.getTotalPrice());
 			st.setInt(3, bdb.getDeliveryMethodId());
 			st.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-			st.setInt(5, bdb.getBase());
-			st.setInt(6, bdb.getCpu());
-			st.setInt(7, bdb.getRam());
-			st.setInt(8, bdb.getGraphics());
-			st.setInt(9, bdb.getStorage());
-			st.setInt(10, bdb.getOs());
-			st.setInt(11, bdb.getOffice());
-			st.setInt(12, bdb.getAssemble());
 			st.executeUpdate();
 
 			ResultSet rs = st.getGeneratedKeys();
@@ -66,6 +59,44 @@ public class BuyDAO {
 	}
 
 	/**
+	 * 購入詳細登録処理
+	 * @param bddb BuyDetailDataBeans
+	 * @throws SQLException
+	 * 			呼び出し元にスローさせるため
+	 */
+	public static void insertBuyDetail(BuyDataBeans bddb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement(
+				    "INSERT INTO t_buy_detail(buy_id,item_total_price,custom_name,base,cpu,ram,graphics,storage,os,office,assemble) "
+				    +"VALUES (?,?,?,?,?,?,?,?,?,?,?)"
+				    ,Statement.RETURN_GENERATED_KEYS);
+				st.setInt(1, bddb.getBuyId());
+				st.setInt(2, bddb.getTotalPrice());
+				st.setString(3, bddb.getCustomName());
+				st.setInt(4, bddb.getBase());
+				st.setInt(5, bddb.getCpu());
+				st.setInt(6, bddb.getRam());
+				st.setInt(7, bddb.getGraphics());
+				st.setInt(8, bddb.getStorage());
+				st.setInt(9, bddb.getOs());
+				st.setInt(10, bddb.getOffice());
+				st.setInt(11, bddb.getAssemble());
+				st.executeUpdate();
+			System.out.println("inserting BuyDetail has been completed");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+	/**
 	 * 購入IDによる購入情報検索
 	 * @param buyId
 	 * @return BuyDataBeans
@@ -73,7 +104,55 @@ public class BuyDAO {
 	 * @throws SQLException
 	 * 				呼び出し元にスローさせるため
 	 */
-	public static BuyDataBeans getBuyDataBeansByBuyId(int buyId,int userId) throws SQLException {
+	public static BuyDataBeans getBuyInfoBuyId(int buyId,int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement(
+					"SELECT * FROM t_buy"
+							+ " JOIN m_delivery_method"
+							+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+							+ " WHERE t_buy.id = ? AND t_buy.user_id = ? ");
+			st.setInt(1, buyId);
+			st.setInt(2, userId);
+
+			ResultSet rs = st.executeQuery();
+
+			BuyDataBeans bdb = new BuyDataBeans();
+			if (rs.next()) {
+				bdb.setId(rs.getInt("id"));
+				bdb.setTotalPrice(rs.getInt("total_price"));
+				bdb.setBuyDate(rs.getTimestamp("create_date"));
+				bdb.setDeliveryMethodId(rs.getInt("delivery_method_id"));
+				bdb.setUserId(rs.getInt("user_id"));
+				bdb.setDeliveryMethodPrice(rs.getInt("price"));
+				bdb.setDeliveryMethodName(rs.getString("name"));
+			}
+
+			System.out.println("searching BuyInfoList by buyID has been completed");
+
+			return bdb;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 購入IDによる購入情報詳細検索
+	 * @param buyId
+	 * @return {BuyDataBeans}
+	 * 				購入情報のデータを持つJavaBeansのリスト
+	 * @throws SQLException
+	 * 				呼び出し元にスローさせるため
+	 */
+	public static ArrayList<BuyDataBeans> getBuyDetailListByBuyId(int buyId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -89,57 +168,49 @@ public class BuyDAO {
 					" os_item.name AS os_name," +
 					" office_item.name AS office_name," +
 					" assemble_item.name AS assemble_name," +
-					" t_buy.* ," +
-					" m_delivery_method.name AS delivery_name," +
-					" m_delivery_method.price" +
-					" FROM t_buy" +
+					" t_buy_detail.*" +
+					" FROM t_buy_detail" +
 					" JOIN m_item AS base_item" +
-					" ON base_item.id = t_buy.base" +
+					" ON base_item.id = t_buy_detail.base" +
 					" JOIN m_item AS cpu_item" +
-					" ON cpu_item.id = t_buy.cpu" +
+					" ON cpu_item.id = t_buy_detail.cpu" +
 					" JOIN m_item AS ram_item" +
-					" ON ram_item.id = t_buy.ram" +
+					" ON ram_item.id = t_buy_detail.ram" +
 					" JOIN m_item AS graphics_item" +
-					" ON graphics_item.id = t_buy.graphics" +
-					" JOIN m_item AS storage_item\n" +
-					" ON storage_item.id = t_buy.storage" +
+					" ON graphics_item.id = t_buy_detail.graphics" +
+					" JOIN m_item AS storage_item" +
+					" ON storage_item.id = t_buy_detail.storage" +
 					" JOIN m_item AS os_item" +
-					" ON os_item.id = t_buy.os" +
+					" ON os_item.id = t_buy_detail.os" +
 					" JOIN m_item AS office_item" +
-					" ON office_item.id = t_buy.office" +
-					" JOIN m_item AS assemble_item\n" +
-					" ON assemble_item.id = t_buy.assemble" +
-					" JOIN m_delivery_method\n" +
-					" ON t_buy.delivery_method_id = m_delivery_method.id" +
-					" WHERE t_buy.id = ?" +
-					" AND user_id = ?");
+					" ON office_item.id = t_buy_detail.office" +
+					" JOIN m_item AS assemble_item" +
+					" ON assemble_item.id = t_buy_detail.assemble" +
+					" WHERE t_buy_detail.buy_id = ?");
 			st.setInt(1, buyId);
-			st.setInt(2, userId);
 
 			ResultSet rs = st.executeQuery();
+			ArrayList<BuyDataBeans> buyDetailList = new ArrayList<BuyDataBeans>();
 
-			BuyDataBeans bdb = new BuyDataBeans();
-			if (rs.next()) {
-				bdb.setId(rs.getInt("id"));
-				bdb.setUserId(rs.getInt("user_id"));
-				bdb.setTotalPrice(rs.getInt("total_price"));
-				bdb.setBuyDate(rs.getTimestamp("create_date"));
-				bdb.setDeliveryMethodId(rs.getInt("delivery_method_id"));
-				bdb.setBaseName(rs.getString("base_name"));
-				bdb.setCpuName(rs.getString("cpu_name"));
-				bdb.setRamName(rs.getString("ram_name"));
-				bdb.setGraphicsName(rs.getString("graphics_name"));
-				bdb.setStorageName(rs.getString("storage_name"));
-				bdb.setOsName(rs.getString("os_name"));
-				bdb.setOfficeName(rs.getString("office_name"));
-				bdb.setAssembleName(rs.getString("assemble_name"));
-				bdb.setDeliveryMethodPrice(rs.getInt("price"));
-				bdb.setDeliveryMethodName(rs.getString("delivery_name"));
+			while (rs.next()) {
+				BuyDataBeans bddb = new BuyDataBeans();
+				bddb.setId(rs.getInt("id"));
+				bddb.setUserId(rs.getInt("buy_id"));
+				bddb.setCustomName(rs.getString("custom_name"));
+				bddb.setTotalPrice(rs.getInt("item_total_price"));
+				bddb.setBaseName(rs.getString("base_name"));
+				bddb.setCpuName(rs.getString("cpu_name"));
+				bddb.setRamName(rs.getString("ram_name"));
+				bddb.setGraphicsName(rs.getString("graphics_name"));
+				bddb.setStorageName(rs.getString("storage_name"));
+				bddb.setOsName(rs.getString("os_name"));
+				bddb.setOfficeName(rs.getString("office_name"));
+				bddb.setAssembleName(rs.getString("assemble_name"));
+				buyDetailList.add(bddb);
 			}
 
-			System.out.println("searching BuyDataBeans by buyID,userID has been completed");
-
-			return bdb;
+			System.out.println("searching BuyDetailList by buyID has been completed");
+			return buyDetailList;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

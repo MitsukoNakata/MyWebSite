@@ -210,8 +210,21 @@ public class CustomDataBeans implements Serializable {
 		this.assemble = assemble;
 	}
 
+	public static CustomDataBeans settingInfo(String[] inputList) {
+		CustomDataBeans idb = new CustomDataBeans();
 
+		idb.setCustomTypeNum(Integer.parseInt(inputList[0]));
+		idb.setCustomName(inputList[1]);
+		idb.setBase(Integer.parseInt(inputList[2]));
+		idb.setCpu(Integer.parseInt(inputList[3]));
+		idb.setRam(Integer.parseInt(inputList[4]));
+		idb.setGraphics(Integer.parseInt(inputList[5]));
+		idb.setStorage(Integer.parseInt(inputList[6]));
+		idb.setOs(Integer.parseInt(inputList[7]));
+		idb.setOffice(Integer.parseInt(inputList[8]));
+		idb.setAssemble(Integer.parseInt(inputList[9]));
 
-
+		return idb;
+	}
 
 }

@@ -21,7 +21,7 @@ public class ItemDAO {
 
 
 	/**
-	 * パーツのカテゴリリストを取得
+	 * 全パーツのカテゴリリストを取得
 	 * @return <ItemDataBeans>
 	 * @throws SQLException
 	 */
@@ -56,6 +56,51 @@ public class ItemDAO {
 				}
 			}
 		}
+
+		/**
+		 * 選択されたのパーツリストを取得
+		 * @return <ItemDataBeans>
+		 * @throws SQLException
+		 */
+			public static ArrayList<ItemDataBeans> getItemListSelected(CustomDataBeans idb) throws SQLException {
+				Connection con = null;
+				PreparedStatement st = null;
+				try {
+					con = DBManager.getConnection();
+
+					st = con.prepareStatement("SELECT * FROM m_item WHERE id= ? or id= ? or id= ? or id= ? or"
+							+ " id= ? or id= ? or id= ? or id= ? ");
+					st.setInt(1, idb.getBase());
+					st.setInt(2, idb.getCpu());
+					st.setInt(3, idb.getRam());
+					st.setInt(4, idb.getGraphics());
+					st.setInt(5, idb.getStorage());
+					st.setInt(6, idb.getOs());
+					st.setInt(7, idb.getOffice());
+					st.setInt(8, idb.getAssemble());
+					ResultSet rs = st.executeQuery();
+
+					ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
+
+					while (rs.next()) {
+						ItemDataBeans item = new ItemDataBeans();
+						item.setId(rs.getInt("id"));
+						item.setItemType(rs.getString("type_category"));
+						item.setName(rs.getString("type_name"));
+						item.setFileName(rs.getString("type_img"));
+						itemList.add(item);
+					}
+					System.out.println("getTypeList completed");
+					return itemList;
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+					throw new SQLException(e);
+				} finally {
+					if (con != null) {
+						con.close();
+					}
+				}
+			}
 
 		/**
 		 * パーツ別のリストアップする

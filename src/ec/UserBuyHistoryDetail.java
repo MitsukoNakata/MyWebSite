@@ -40,8 +40,12 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		    int buyId = Integer.parseInt(request.getParameter("buy_id"));
 
 			//合計用購入情報
-			BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(buyId,userId);
+			BuyDataBeans resultBDB = BuyDAO.getBuyInfoBuyId(buyId,userId);
 			request.setAttribute("resultBDB", resultBDB);
+
+			// 購入アイテム情報
+			ArrayList<BuyDataBeans> buyDetailList = BuyDAO.getBuyDetailListByBuyId(buyId);
+			request.setAttribute("buyDetailList", buyDetailList);
 
 			//------パーツのリストを取得
 			ArrayList<ItemDataBeans>typeList= ItemDAO.getTypeList();

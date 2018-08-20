@@ -34,13 +34,15 @@
             <span class="text-muted">カートの内容</span>
           </h5>
           <ul class="list-group mb-3">
+          <c:forEach var="cart" items="${cart}" varStatus="status">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">商品名</h6>
-                <small class="text-muted">${customName}</small>
+                <small class="text-muted">${cart.customName}</small>
               </div>
-              <span class="text-muted"><fmt:formatNumber>${bdb.totalPrice}</fmt:formatNumber>円</span>
+              <span class="text-muted"><fmt:formatNumber>${cart.totalPrice}</fmt:formatNumber>円</span>
             </li>
+           </c:forEach>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">配送方法</h6>
@@ -50,7 +52,8 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>合計金額</span>
-              <fmt:formatNumber>${bdb.totalPrice + bdb.deliveryMethodPrice}</fmt:formatNumber>円
+              <c:set var="buyTotalPrice" value="${cartTotalPrice + bdb.deliveryMethodPrice}"/>
+              <fmt:formatNumber>${buyTotalPrice}</fmt:formatNumber>円
             </li>
           </ul>
         </div>
@@ -129,6 +132,7 @@
               </div>
             </div>
             <hr class="mb-4">
+            <input type="hidden" name="buy_total_price" value="${buyTotalPrice}">
             <button class="btn btn-danger btn-lg btn-block" type="submit">入力した内容で注文する</button>
           </form>
         </div>

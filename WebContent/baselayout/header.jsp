@@ -11,10 +11,12 @@
         <ul class="navbar-nav">
 			<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false; %>
 
-			<%--li class="nav-item"><a class="nav-link" href="Cart"><img src="img/cart.png"> Cart</a></li--%>
 			<c:if test ="${userId == 1}">
 			<li class="nav-item"><a class="nav-link" href="MasterPage"><img src="img/edit.png">Management</a></li>
 			</c:if>
+
+			<li class="nav-item"><a class="nav-link" href="Cart"><img src="img/cart.png"> Cart</a></li>
+
 			<%if(isLogin){ %>
 			<li class="nav-item"><a class="nav-link" href="UserData"><img src="img/mypage.png"> My Account</a></li>
 			<%}else{ %>
